@@ -12,7 +12,7 @@
           ' data-name="' + window.escapeHtml(s.name) + '"' +
           ' data-avatar="' + window.escapeHtml(window.assetUrl(s.avatar)) + '"' +
           ' onclick="handleSelect(this)">' +
-          '<img src="' + window.escapeHtml(window.assetUrl(s.avatar)) + '" class="op-img" onerror="this.src=DEFAULT_AVATAR">' +
+          '<img referrerpolicy="no-referrer" src="' + window.escapeHtml(window.assetUrl(s.avatar)) + '" class="op-img" onerror="this.src=DEFAULT_AVATAR">' +
           '<div class="op-txt">' + window.escapeHtml(s.name) + '</div></div>';
       }).join('');
     } catch (e) {

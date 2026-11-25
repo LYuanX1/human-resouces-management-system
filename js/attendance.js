@@ -10,7 +10,7 @@
     var s = rec.student || {};
     var q = window.jsArg;
     return '<tr class="data-row">' +
-      '<td><img src="' + window.escapeHtml(window.assetUrl(s.avatar)) + '" class="table-avatar" onerror="this.src=DEFAULT_AVATAR"></td>' +
+      '<td><img referrerpolicy="no-referrer" src="' + window.escapeHtml(window.assetUrl(s.avatar)) + '" class="table-avatar" onerror="this.src=DEFAULT_AVATAR"></td>' +
       '<td>' + window.escapeHtml(s.id) + '</td>' +
       '<td><strong>' + window.escapeHtml(s.name) + '</strong></td>' +
       '<td>' + window.escapeHtml(s.gender) + '</td>' +

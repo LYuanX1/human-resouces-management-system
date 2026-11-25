@@ -9,6 +9,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <!-- 云存储已开启 Referer 白名单，页面统一不发送 Referer 以通过校验 -->
+  <meta name="referrer" content="no-referrer">
   <meta charset="UTF-8">
   <title>任务派遣控制台</title>
   <style>
@@ -217,10 +219,10 @@
 </head>
 <body>
 
-<video autoplay muted loop id="bg-video"><source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4"></video>
+<video autoplay muted loop id="bg-video" referrerpolicy="no-referrer"><source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4" referrerpolicy="no-referrer"></video>
 
 <nav class="navbar">
-  <div class="nav-left"><img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img"></div>
+  <div class="nav-left"><img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img" referrerpolicy="no-referrer"></div>
   <div class="nav-right">
     <a href="main.html" class="nav-item">首页</a>
     <a href="info.html" class="nav-item">人事管理</a>
@@ -464,7 +466,7 @@
       div.className = 'member-item';
       div.setAttribute('data-id', op.id);
       div.innerHTML = `
-                    <img src="/` + op.avatar + `" class="member-avatar">
+                    <img src="/` + op.avatar + `" class="member-avatar" referrerpolicy="no-referrer">
                     <div class="member-name">` + op.name + `</div>
                 `;
       squadDiv.appendChild(div);

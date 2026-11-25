@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <!-- 云存储已开启 Referer 白名单，页面统一不发送 Referer 以通过校验 -->
+  <meta name="referrer" content="no-referrer">
   <meta charset="UTF-8">
   <title>修改档案 - 三角洲行动</title>
   <style>
@@ -66,7 +68,7 @@
 
     <div class="avatar-section">
       <div class="avatar-upload-area" onclick="document.getElementById('editFileInput').click()">
-        <img id="avatarPreview" src="" data-avatar="1">
+        <img id="avatarPreview" src="" data-avatar="1" referrerpolicy="no-referrer">
         <div class="edit-badge">更换头像</div>
       </div>
     </div>

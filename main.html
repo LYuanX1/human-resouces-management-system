@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <!-- 云存储已开启 Referer 白名单，页面统一不发送 Referer 以通过校验 -->
+  <meta name="referrer" content="no-referrer">
     <meta charset="UTF-8">
     <title>指挥中心 - 三角洲行动</title>
     <style>
@@ -202,13 +204,13 @@
 </head>
 <body>
 
-<video autoplay muted loop id="bg-video">
-    <source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4">
+<video autoplay muted loop id="bg-video" referrerpolicy="no-referrer">
+    <source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4" referrerpolicy="no-referrer">
 </video>
 
 <nav class="navbar">
     <div class="nav-left">
-        <img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img">
+        <img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img" referrerpolicy="no-referrer">
     </div>
     <div class="nav-right">
         <a href="main.html" class="nav-item active">首页</a>
@@ -257,7 +259,7 @@
                 <span>GLOBAL OPERATIONS THEATER</span>
             </div>
             <div class="map-container">
-                <img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/map.jpg" alt="战略地图" class="map-img">
+                <img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/map.jpg" alt="战略地图" class="map-img" referrerpolicy="no-referrer">
             </div>
         </div>
     </div>

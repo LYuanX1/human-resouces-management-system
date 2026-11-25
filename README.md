@@ -55,7 +55,24 @@
 python3 scripts/verify-assets.py
 ```
 
-全部返回 200/206 即说明资源就绪且为公有读。
+脚本会从两个视角校验：**服务器侧（无 Referer）**验证文件已上传且公有读；
+**浏览器侧（带页面 Referer）**检查防盗链白名单是否放行部署域名。
+至少视角 1 全部 200/206，资源才算就绪。
+
+### 云存储防盗链说明（重要）
+
+支付宝云对象存储 CDN 已开启 **Referer ACL**：携带任意非白名单域名 Referer 的
+请求会返回 `403 denied by Referer ACL`（浏览器加载 `<img>` / `<video>` 时会
+自动携带页面域名 Referer，因此不处理会导致全部静态资源加载失败）。
+
+本项目已在代码侧解决：所有页面 `<head>` 加了
+`<meta name="referrer" content="no-referrer">`，全部
+`<img>` / `<video>` / `<source>` 标签及 JS 动态拼接的头像 `<img>` 均带
+`referrerpolicy="no-referrer"`，浏览器请求云存储时不发送 Referer（云端允许
+空 Referer），因此**任何部署域名、预览链接均无需再配置白名单**。
+
+若后续想彻底放开，也可在对象存储防盗链白名单中加入部署域名
+（如 `*.lyuanxi.top`）作为双保险；改动后重跑校验脚本确认视角 2 通过。
 
 ### 2. 开通并绑定 KV
 

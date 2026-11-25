@@ -16,7 +16,7 @@
       .map(function (v) { return "'" + q(v) + "'"; }).join(',');
     return '<tr class="mat-row" id="row-' + window.escapeHtml(item.id) + '">' +
       '<td><div class="applicant-box">' +
-        '<img src="' + window.escapeHtml(window.assetUrl(item.avatar)) + '" class="app-avatar" onerror="this.src=DEFAULT_AVATAR">' +
+        '<img referrerpolicy="no-referrer" src="' + window.escapeHtml(window.assetUrl(item.avatar)) + '" class="app-avatar" onerror="this.src=DEFAULT_AVATAR">' +
         '<div class="app-name">' + window.escapeHtml(item.name) + '</div></div></td>' +
       '<td><span class="text-label">单据编号</span><span class="text-value">' + window.escapeHtml(item.id) + '</span></td>' +
       '<td><span class="text-label">所属部门</span><span class="dept-badge">' + window.escapeHtml(item.department) + '</span></td>' +

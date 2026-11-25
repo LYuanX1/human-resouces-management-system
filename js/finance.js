@@ -9,7 +9,7 @@
       .map(function (v) { return "'" + q(v) + "'"; }).join(',');
     return '<tr class="finance-row" id="row-' + window.escapeHtml(item.id) + '">' +
       '<td><div class="applicant-cell">' +
-        '<img src="' + window.escapeHtml(window.assetUrl(item.avatar)) + '" class="app-avatar" onerror="this.src=DEFAULT_AVATAR">' +
+        '<img referrerpolicy="no-referrer" src="' + window.escapeHtml(window.assetUrl(item.avatar)) + '" class="app-avatar" onerror="this.src=DEFAULT_AVATAR">' +
         '<div class="app-name">' + window.escapeHtml(item.name) + '</div></div></td>' +
       '<td><span class="text-label">申请ID</span><span class="text-value">' + window.escapeHtml(item.id) + '</span></td>' +
       '<td><span class="text-label">所属部门</span><span class="dept-badge">' + window.escapeHtml(item.department) + '</span></td>' +

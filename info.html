@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <!-- 云存储已开启 Referer 白名单，页面统一不发送 Referer 以通过校验 -->
+  <meta name="referrer" content="no-referrer">
     <meta charset="UTF-8">
     <title>干员档案库 - 三角洲行动</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -119,10 +121,10 @@
     </style>
 </head>
 <body>
-<video autoplay muted loop id="bg-video"><source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4"></video>
+<video autoplay muted loop id="bg-video" referrerpolicy="no-referrer"><source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4" referrerpolicy="no-referrer"></video>
 
 <nav class="navbar">
-    <div class="nav-left"><img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img"></div>
+    <div class="nav-left"><img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img" referrerpolicy="no-referrer"></div>
     <div class="nav-right">
         <a href="main.html" class="nav-item">首页</a>
         <a href="info.html" class="nav-item active">人事管理</a>
@@ -175,7 +177,7 @@
         <form action="#addStudent" method="post" enctype="multipart/form-data" id="addForm">
             <div class="avatar-upload-area" onclick="document.getElementById('addFileInput').click()">
                 <div class="upload-placeholder" id="addPlaceHolder">点击上传<br>照片</div>
-                <img id="addAvatarPreview" class="avatar-preview-img">
+                <img id="addAvatarPreview" class="avatar-preview-img" referrerpolicy="no-referrer">
             </div>
             <input type="file" name="avatarFile" id="addFileInput" style="display:none;" accept="image/*" onchange="previewImage(this, 'addAvatarPreview', 'addPlaceHolder')">
 
@@ -206,7 +208,7 @@
             <input type="hidden" name="oldAvatar" id="updateOldAvatar">
 
             <div class="avatar-upload-area" onclick="document.getElementById('updateFileInput').click()">
-                <img id="updateAvatarPreview" class="avatar-preview-img" style="display:block;">
+                <img id="updateAvatarPreview" class="avatar-preview-img" style="display:block;" referrerpolicy="no-referrer">
             </div>
             <input type="file" name="avatarFile" id="updateFileInput" style="display:none;" accept="image/*" onchange="previewImage(this, 'updateAvatarPreview', null)">
             <div style="text-align:center; font-size:12px; color:#666; margin-top:-10px; margin-bottom:15px;">点击图片更换</div>

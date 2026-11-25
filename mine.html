@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh">
 <head>
+  <!-- 云存储已开启 Referer 白名单，页面统一不发送 Referer 以通过校验 -->
+  <meta name="referrer" content="no-referrer">
     <meta charset="UTF-8">
     <title>个人指挥中心 - 三角洲行动</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -83,12 +85,12 @@
 </head>
 <body>
 
-<video autoplay muted loop id="bg-video">
-    <source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4">
+<video autoplay muted loop id="bg-video" referrerpolicy="no-referrer">
+    <source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4" referrerpolicy="no-referrer">
 </video>
 
 <nav class="navbar">
-    <div class="nav-left"><img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img"></div>
+    <div class="nav-left"><img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img" referrerpolicy="no-referrer"></div>
     <div class="nav-right">
         <a href="main.html" class="nav-item">首页</a>
         <a href="info.html" class="nav-item">人事管理</a>
@@ -100,7 +102,7 @@
         <a href="#" class="nav-item">帮助</a>
         <div class="user-menu-container">
             <img src="" data-avatar="1"
-                 class="user-avatar-nav" onclick="location.href='mine.html'">
+                 class="user-avatar-nav" onclick="location.href='mine.html'" referrerpolicy="no-referrer">
             <div class="user-dropdown">
                 <a href="mine.html" class="dropdown-item">👤 个人中心</a>
                 <a href="#" class="dropdown-item">⚙️ 系统设置</a>
@@ -114,7 +116,7 @@
 
     <div class="profile-left">
         <img src="" data-avatar="1"
-             class="profile-avatar-lg">
+             class="profile-avatar-lg" referrerpolicy="no-referrer">
         <button class="modify-btn" onclick="openModal()">修改资料</button>
     </div>
 
@@ -147,7 +149,7 @@
 
             <div class="upload-container" onclick="document.getElementById('fileInput').click()">
                 <img id="previewImg" class="upload-img"
-                     src="" data-avatar="1">
+                     src="" data-avatar="1" referrerpolicy="no-referrer">
                 <div class="upload-overlay">
                     <div class="upload-icon">+</div>
                     <div class="upload-text">上传照片</div>
