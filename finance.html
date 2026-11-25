@@ -1,0 +1,395 @@
+<%
+  // 禁止缓存
+  response.setHeader("Pragma", "no-cache");
+  response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
+  response.setDateHeader("Expires", 0);
+%>
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>财务审批中心</title>
+  <style>
+    /* --- 1. 全局样式 --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { height: 100%; width: 100%; font-family: "Microsoft YaHei", sans-serif; overflow-x: hidden; }
+    body {
+      /* 保留原有的背景设置 */
+      background-color: #0b1013;
+      /* 注意：背景视频不受影响，因为它有 position: fixed */
+      color: #fff;
+      margin: 0;
+
+      /* 【核心修改】开启 Flex 布局，垂直排列 */
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh; /* 保证最小高度占满屏幕 */
+    }
+    #bg-video { position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -100; object-fit: cover; filter: brightness(0.5); }
+
+    /* --- 导航栏 (通用升级版) --- */
+    .navbar {
+      width: 100%; height: 90px; background-color: #1F2D35;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0 40px; position: fixed; top: 0; z-index: 1000;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+    }
+    .nav-left .logo-img { height: 65px; width: auto; display: block; }
+
+    /* 右侧容器：强制靠右，链接间距 25px */
+    .nav-right {
+      display: flex; align-items: center; gap: 25px; margin-left: auto;
+    }
+
+    /* 导航链接 */
+    .nav-item { text-decoration: none; font-size: 16px; color: #9D9E9E; transition: color 0.3s; font-weight: 500; }
+    .nav-item:hover, .nav-item.active { color: #fff; }
+
+    /* --- 头像菜单容器 (新增) --- */
+    .user-menu-container {
+      position: relative; /* 作为定位基准 */
+      margin-left: 35px;  /* 保持和文字链接的距离 */
+      padding-bottom: 10px; /* 增加底部热区，防止鼠标移向下拉框时消失 */
+      top: 5px; /* 微调垂直对齐 */
+    }
+
+    /* 头像本体 */
+    .user-avatar {
+      width: 45px; height: 45px; border-radius: 50%;
+      background-color: #28a745; color: #fff;
+      display: flex; justify-content: center; align-items: center;
+      font-size: 14px; font-weight: bold; cursor: pointer;
+      transition: transform 0.2s;
+    }
+    .user-menu-container:hover .user-avatar { transform: scale(1.1); }
+
+    /* 下拉菜单 (悬停显示) */
+    .user-dropdown {
+      display: none; /* 默认隐藏 */
+      position: absolute;
+      top: 55px; /* 在头像正下方 */
+      right: -10px; /* 对齐右侧 */
+      width: 140px;
+      background: rgba(31, 45, 53, 0.95); /* 深色磨砂背景 */
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 8px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+      overflow: hidden;
+      flex-direction: column;
+      z-index: 9999;
+    }
+
+    /* 鼠标悬停容器时，显示菜单 */
+    .user-menu-container:hover .user-dropdown { display: flex; animation: slideDown 0.2s ease-out; }
+
+    /* 菜单项 */
+    .dropdown-item {
+      padding: 12px 20px;
+      color: #ccc; text-decoration: none; font-size: 14px;
+      transition: background 0.2s, color 0.2s;
+      text-align: center;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .dropdown-item:last-child { border-bottom: none; }
+    .dropdown-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+    .dropdown-item.logout { color: #ff6b6b; } /* 退出登录显示红色 */
+    .dropdown-item.logout:hover { background: rgba(220, 53, 69, 0.2); }
+
+    @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+    /* --- 2. 主体布局 --- */
+    .main-container, .main-content {
+      /* 保留你原有的边距设置 */
+      margin-top: 120px;
+      width: 90%;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+      padding-bottom: 20px;
+
+      /* 【核心修改】flex: 1 让这个容器占据所有剩余高度 */
+      /* 这就是把版权信息“挤”到最底下的关键 */
+      flex: 1;
+    }    .page-title { font-size: 28px; font-weight: 900; margin-bottom: 30px; border-left: 6px solid #ffc107; padding-left: 15px; letter-spacing: 2px; }
+
+    /* --- 3. 报销列表 --- */
+    .finance-table { width: 100%; border-collapse: separate; border-spacing: 0 15px; }
+
+    .finance-row {
+      background: rgba(31, 45, 53, 0.8); backdrop-filter: blur(10px);
+      transition: transform 0.2s, box-shadow 0.2s, opacity 0.5s; /* opacity 用于删除动画 */
+    }
+    .finance-row:hover { transform: scale(1.01); box-shadow: 0 5px 20px rgba(0,0,0,0.5); background: rgba(31, 45, 53, 0.95); }
+
+    .finance-row td { padding: 20px; vertical-align: middle; border-top: 1px solid rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.05); }
+    .finance-row td:first-child { border-left: 1px solid rgba(255,255,255,0.05); border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+    .finance-row td:last-child { border-right: 1px solid rgba(255,255,255,0.05); border-top-right-radius: 10px; border-bottom-right-radius: 10px; text-align: right; }
+
+    .applicant-cell { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100px; }
+    .app-avatar { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #28a745; margin-bottom: 5px; object-fit: cover; }
+    .app-name { font-size: 14px; font-weight: bold; color: #fff; }
+
+    .text-label { font-size: 12px; color: #888; display: block; margin-bottom: 4px; }
+    .text-value { font-size: 16px; color: #ddd; }
+    .amount-value { font-size: 20px; color: #ffc107; font-weight: bold; font-family: 'Consolas', monospace; }
+    .dept-badge { padding: 4px 10px; border-radius: 4px; background: rgba(23, 162, 184, 0.2); color: #17a2b8; border: 1px solid #17a2b8; font-size: 12px; font-weight: bold; }
+
+    .btn-view { padding: 8px 20px; border: 1px solid #17a2b8; color: #17a2b8; background: rgba(23, 162, 184, 0.1); border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.2s; }
+    .btn-view:hover { background: #17a2b8; color: #fff; }
+
+    /* --- 4. 详情弹窗样式 --- */
+    .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
+    .modal-box { width: 600px; background: #1F2D35; border: 1px solid rgba(255,255,255,0.2); border-radius: 15px; padding: 0; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.8); display: flex; flex-direction: column; animation: fadeIn 0.3s ease-out; }
+
+    .modal-header { padding: 20px; background: rgba(0,0,0,0.3); border-bottom: 1px solid rgba(255,255,255,0.1); text-align: center; font-size: 20px; font-weight: bold; letter-spacing: 1px; }
+    .modal-body { padding: 30px; }
+
+    .info-grid { display: flex; gap: 30px; margin-bottom: 30px; }
+    .info-left { flex: 1; display: flex; flex-direction: column; align-items: center; border-right: 1px solid rgba(255,255,255,0.1); padding-right: 30px; }
+    .info-right { flex: 2; display: flex; flex-direction: column; justify-content: center; }
+
+    .modal-avatar { width: 100px; height: 100px; border-radius: 50%; border: 3px solid #28a745; margin-bottom: 15px; object-fit: cover; }
+    .modal-name { font-size: 22px; font-weight: bold; margin-bottom: 5px; }
+    .modal-id { color: #888; font-size: 14px; }
+    .modal-amount-label { color: #888; font-size: 14px; margin-bottom: 5px; }
+    .modal-amount { font-size: 36px; color: #ffc107; font-weight: 900; line-height: 1; }
+
+    .reason-box { background: rgba(255,255,255,0.05); border-radius: 8px; padding: 15px; border: 1px solid rgba(255,255,255,0.1); }
+    .reason-title { color: #28a745; font-size: 14px; font-weight: bold; margin-bottom: 8px; }
+    .reason-text { color: #ddd; line-height: 1.6; font-size: 15px; }
+
+    .modal-footer { display: flex; height: 60px; border-top: 1px solid rgba(255,255,255,0.1); }
+    .action-btn { flex: 1; border: none; font-size: 16px; font-weight: bold; cursor: pointer; transition: all 0.2s; }
+    .btn-reject { background: rgba(220, 53, 69, 0.1); color: #dc3545; border-right: 1px solid rgba(255,255,255,0.1); }
+    .btn-reject:hover { background: #dc3545; color: #fff; }
+    .btn-approve { background: rgba(40, 167, 69, 0.1); color: #28a745; }
+    .btn-approve:hover { background: #28a745; color: #fff; }
+
+    /* --- 5. 操作确认弹窗 (驳回/通过) --- */
+    .confirm-box { width: 450px; background: #1F2D35; border-radius: 12px; border: 2px solid; padding: 25px; text-align: center; }
+    .confirm-box.danger { border-color: #dc3545; box-shadow: 0 0 30px rgba(220, 53, 69, 0.3); } /* 红色 */
+    .confirm-box.success { border-color: #28a745; box-shadow: 0 0 30px rgba(40, 167, 69, 0.3); } /* 绿色 */
+
+    .confirm-title { font-size: 22px; font-weight: bold; margin-bottom: 15px; }
+    .confirm-input { width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: #fff; margin-bottom: 20px; outline: none; height: 80px; resize: none; }
+
+    .confirm-btns { display: flex; gap: 15px; }
+    .c-btn { flex: 1; padding: 10px; border-radius: 6px; border: none; cursor: pointer; font-weight: bold; }
+    .c-cancel { background: rgba(255,255,255,0.1); color: #fff; }
+    .c-danger { background: #dc3545; color: #fff; }
+    .c-success { background: #28a745; color: #fff; }
+
+    /* --- 6. 结果提示弹窗 --- */
+    .result-box { width: 350px; background: #1F2D35; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 10px 40px rgba(0,0,0,0.8); }
+    .result-icon { font-size: 40px; margin-bottom: 10px; }
+    .result-text { font-size: 16px; margin-bottom: 15px; }
+    .result-btn { padding: 8px 30px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.3); color: #fff; border-radius: 20px; cursor: pointer; }
+    .result-btn:hover { background: rgba(255,255,255,0.2); }
+
+    .footer-copyright {
+      /* 移除 position: absolute; */
+      text-align: center;
+      color: rgba(255, 255, 255, 0.3);
+      font-size: 12px;
+
+      /* 增加上下留白 */
+      padding: 30px 0;
+      width: 100%;
+
+      /* 确保它不会被压缩 */
+      flex-shrink: 0;
+    }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+  </style>
+</head>
+<body>
+
+<video autoplay muted loop id="bg-video"><source src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4" type="video/mp4"></video>
+
+<nav class="navbar">
+  <div class="nav-left"><img src="https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png" alt="Logo" class="logo-img"></div>
+  <div class="nav-right">
+    <a href="main.html" class="nav-item">首页</a>
+    <a href="info.html" class="nav-item">人事管理</a>
+    <a href="mission.html" class="nav-item">任务派遣</a>
+    <a href="finance.html" class="nav-item active">财务报销</a>
+    <a href="material.html" class="nav-item">物资申领</a>
+    <a href="attendance.html" class="nav-item">考勤打卡</a>
+    <a href="#" class="nav-item">社区中心</a>
+    <a href="#" class="nav-item">帮助</a>
+    <div class="user-menu-container">
+      <div class="user-avatar" onclick="location.href='mine.html'">CMD</div>
+      <div class="user-dropdown">
+        <a href="mine.html" class="dropdown-item">👤 个人中心</a>
+        <a href="#" class="dropdown-item">⚙️ 系统设置</a>
+        <a href="index.html" class="dropdown-item logout">🛑 退出登录</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="main-content">
+  <div class="page-title">财务审批待办</div>
+
+  <table class="finance-table">
+    <tbody id="financeBody"></tbody>
+  </table>
+
+  <div class="footer-copyright">
+    COPYRIGHT © 2024-2025 LRB&HJM. ALL RIGHTS RESERVED
+  </div>
+</div>
+
+<div class="modal-overlay" id="financeModal">
+  <div class="modal-box">
+    <div class="modal-header">报销单据详情</div>
+    <div class="modal-body">
+      <div class="info-grid">
+        <div class="info-left">
+          <img id="m-avatar" src="" class="modal-avatar">
+          <div id="m-name" class="modal-name">--</div>
+          <div class="modal-id">ID: <span id="m-id">--</span></div>
+          <div class="dept-badge" id="m-dept" style="margin-top: 10px;">--</div>
+        </div>
+        <div class="info-right">
+          <div class="modal-amount-label">申请总金额</div>
+          <div class="modal-amount">¥ <span id="m-amount">0.00</span></div>
+          <div style="color: #666; font-size: 12px; margin-top: 5px;">单据编号: <span id="m-doc-id">--</span></div>
+        </div>
+      </div>
+      <div class="reason-box">
+        <div class="reason-title">📝 申请事由说明</div>
+        <div id="m-reason" class="reason-text">--</div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="action-btn btn-reject" onclick="openRejectDialog()">❌ 审批不通过</button>
+      <button class="action-btn btn-approve" onclick="openApproveDialog()">✅ 审批通过</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="rejectDialog">
+  <div class="confirm-box danger">
+    <div class="confirm-title" style="color: #dc3545;">驳回审批</div>
+    <textarea id="rejectReason" class="confirm-input" placeholder="请输入驳回原因..."></textarea>
+    <div class="confirm-btns">
+      <button class="c-btn c-cancel" onclick="closeRejectDialog()">取消</button>
+      <button class="c-btn c-danger" onclick="confirmReject()">确认驳回</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="approveDialog">
+  <div class="confirm-box success">
+    <div class="confirm-title" style="color: #28a745;">确认批准</div>
+    <div style="color:#ddd; margin-bottom:20px;">确认批准该笔报销款项吗？<br>操作将立即生效。</div>
+    <div class="confirm-btns">
+      <button class="c-btn c-cancel" onclick="closeApproveDialog()">取消</button>
+      <button class="c-btn c-success" onclick="confirmApprove()">确认批准</button>
+    </div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="resultModal">
+  <div class="result-box">
+    <div id="res-icon" class="result-icon"></div>
+    <div id="res-text" class="result-text"></div>
+    <button class="result-btn" onclick="closeResultModal()">确定</button>
+  </div>
+</div>
+
+<script>
+  let currentDocId = null; // 当前正在处理的单据ID
+
+  // ------------------ 1. 详情弹窗逻辑 ------------------
+  function openFinanceModal(docId, name, userId, dept, amount, reason, avatar) {
+    currentDocId = docId; // 记录ID
+    document.getElementById('m-doc-id').innerText = docId;
+    document.getElementById('m-name').innerText = name;
+    document.getElementById('m-id').innerText = userId;
+    document.getElementById('m-dept').innerText = dept;
+    document.getElementById('m-amount').innerText = amount;
+    document.getElementById('m-reason').innerText = reason;
+
+    var realAvatar = (avatar && avatar !== 'null' && avatar !== '') ?
+            assetUrl(avatar) :
+            DEFAULT_AVATAR;
+    document.getElementById('m-avatar').src = realAvatar;
+
+    document.getElementById('financeModal').style.display = 'flex';
+  }
+
+  // ------------------ 2. 驳回逻辑 ------------------
+  function openRejectDialog() {
+    document.getElementById('rejectReason').value = ""; // 清空
+    document.getElementById('rejectDialog').style.display = 'flex';
+  }
+  function closeRejectDialog() {
+    document.getElementById('rejectDialog').style.display = 'none';
+  }
+  function confirmReject() {
+    var reason = document.getElementById('rejectReason').value;
+    if(!reason.trim()) { alert("请输入驳回原因"); return; }
+
+    // 关闭所有弹窗
+    closeRejectDialog();
+    document.getElementById('financeModal').style.display = 'none';
+
+    // 显示结果
+    showResult("🚫 已驳回", "单据 " + currentDocId + " 已被驳回。", "#dc3545");
+
+    // 移除列表项
+    removeRow(currentDocId);
+  }
+
+  // ------------------ 3. 通过逻辑 ------------------
+  function openApproveDialog() {
+    document.getElementById('approveDialog').style.display = 'flex';
+  }
+  function closeApproveDialog() {
+    document.getElementById('approveDialog').style.display = 'none';
+  }
+  function confirmApprove() {
+    closeApproveDialog();
+    document.getElementById('financeModal').style.display = 'none';
+
+    showResult("✅ 已批准", "单据 " + currentDocId + " 审批通过，财务打款中。", "#28a745");
+    removeRow(currentDocId);
+  }
+
+  // ------------------ 4. 结果展示 & 移除行 ------------------
+  function showResult(title, text, color) {
+    document.getElementById('res-icon').innerText = title.substring(0, 2); // 取图标
+    document.getElementById('res-icon').style.color = color;
+    document.getElementById('res-text').innerHTML = "<strong>" + title.substring(2) + "</strong><br>" + text;
+    document.getElementById('resultModal').style.display = 'flex';
+  }
+  function closeResultModal() {
+    document.getElementById('resultModal').style.display = 'none';
+  }
+
+  function removeRow(id) {
+    var row = document.getElementById('row-' + id);
+    if (row) {
+      row.style.opacity = '0';
+      setTimeout(function() { row.remove(); }, 500); // 动画结束后删除DOM
+    }
+  }
+
+  // 点击空白处不做关闭（强制用户点击按钮，防止误触）
+  // 如果想点击空白关闭，可以解开下面的注释
+  /*
+  window.onclick = function(event) {
+      if (event.target == document.getElementById('financeModal')) document.getElementById('financeModal').style.display = 'none';
+  }
+  */
+</script>
+
+<script src="js/config.js"></script>
+<script src="js/common.js"></script>
+<script src="js/finance.js"></script>
+</body>
+</html>

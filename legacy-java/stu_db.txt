@@ -1,0 +1,47 @@
+CREATE DATABASE IF NOT EXISTS stu_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+USE stu_db;
+
+DROP TABLE IF EXISTS student;
+
+CREATE TABLE student (
+    id INT AUTO_INCREMENT PRIMARY KEY COMMENT '干员编号',
+    name VARCHAR(50) NOT NULL COMMENT '代号/姓名',
+    age INT NOT NULL COMMENT '年龄',
+    gender VARCHAR(10) NOT NULL COMMENT '性别',
+    major VARCHAR(100) DEFAULT '特勤组' COMMENT '专业/技能',
+    department VARCHAR(50) DEFAULT '突击' COMMENT '部门/兵种',
+    avatar VARCHAR(255) DEFAULT 'assets/avatar_default.png' COMMENT '头像路径'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+INSERT INTO student (name, age, gender, major, department, avatar) VALUES 
+('红狼', 28, '男', '动力外骨骼', '突击', 'assets/avatar_kai.png'),
+('蜂医', 32, '男', '激素枪', '支援', 'assets/avatar_roy.png'),
+('熊鲁鲁', 29, '男', '烧鸟', '工程', 'assets/avatar_xionglulu.png'),
+('熊名', 29, '男', '静步', '突击', 'assets/avatar_xiongming.png'),
+('熊娜', 29, '女', '吉你萝柚', '侦察', 'assets/avatar_xiongna.png'),
+('熊娅', 29, '女', '召唤蜻蜓队长', '支援', 'assets/avatar_xiongya.png'),
+('善战的狼', 29, '男', '花来', '突击', 'assets/avatar_szdwovlf.png'),
+('哈基蜂', 29, '男', '无视风险继续扎针', '支援', 'assets/avatar_hajifeng.png'),
+('露娜', 24, '女', '侦察箭矢', '侦察', 'assets/avatar_luna.png'),
+('牧羊人', 35, '男', '声波震慑', '工程', 'assets/avatar_shepherd.png'),
+('骇爪', 25, '女', '信号破译器', '侦察', 'assets/avatar_hackclaw.png'),
+('威龙', 30, '男', '虎蹲炮', '突击', 'assets/avatar_weilong.png'),
+('乌鲁鲁', 34, '男', '巡飞弹', '工程', 'assets/avatar_wululu.png'),
+('疾风', 26, '女', '紧急回避装置', '突击', 'assets/avatar_wind.png'),
+('深蓝', 31, '男', '防爆套装', '工程', 'assets/avatar_deepbule.png'),
+('无名', 29, '男', '静默潜袭', '突击', 'assets/avatar_noname.png'),
+('蛊', 29, '女', '“流萤”集群系统', '支援', 'assets/avatar_gu.png'),
+('比特', 29, '男', '巡猎蜘蛛', '工程', 'assets/avatar_bit.png'),
+('银翼', 29, '男', '蜂鸟间谍摄像头', '侦察', 'assets/avatar_silverwing.png'),
+('熊医', 29, '男', 'biubiubiu', '支援', 'assets/avatar_xiongyi.png'),
+('熊晓雯', 29, '女', '会发光的小飞机', '侦察', 'assets/avatar_xiongxiaowen.png'),
+('盾熊', 29, '男', '狗盾牌', '工程', 'assets/avatar_dunxiong.png'),
+('威熊', 29, '男', '大红包', '突击', 'assets/avatar_weixiong.png');
+
+
+ALTER TABLE user ADD COLUMN avatar VARCHAR(255) DEFAULT 'assets/avatar_default.png';
+ALTER TABLE user ADD COLUMN signature VARCHAR(255) DEFAULT '三角洲行动指挥官，随时准备出击';
+ALTER TABLE user ADD COLUMN gender VARCHAR(10) DEFAULT '男';
+
+COMMIT;

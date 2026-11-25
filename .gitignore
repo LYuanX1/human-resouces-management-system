@@ -22,3 +22,25 @@
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+
+# ---- 本项目新增 ----
+# 凭证 / 本地环境（严禁入库）
+.env
+.env.*
+*.pem
+*.key
+secrets.json
+credentials.json
+# 依赖与临时文件
+node_modules/
+__pycache__/
+.DS_Store
+*.pyc
+# 静态资源二进制不入库（统一放云存储 hrms/）
+assets/
+*.mp4
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.webp

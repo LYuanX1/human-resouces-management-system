@@ -1,0 +1,421 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+<c:if test="${list == null}">
+    <c:redirect url="/listStudent"/>
+</c:if>
+
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>干员档案库 - 三角洲行动</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* --- 1. 全局样式 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body, html { height: 100%; width: 100%; font-family: "Microsoft YaHei", sans-serif; overflow-x: hidden; }
+
+        body {
+            background-color: #0b1013;
+            color: #fff;
+            display: flex; flex-direction: column;
+            min-height: 100vh;
+        }
+
+        #bg-video { position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -100; object-fit: cover; filter: brightness(0.5); }
+
+        /* --- 2. 导航栏 --- */
+        .navbar { width: 100%; height: 90px; background-color: #1F2D35; display: flex; justify-content: space-between; align-items: center; padding: 0 40px; position: fixed; top: 0; z-index: 100; box-shadow: 0 4px 10px rgba(0,0,0,0.5); }
+        .nav-left .logo-img { height: 65px; width: auto; display: block; }
+
+        .nav-right { display: flex; align-items: center; gap: 25px; margin-left: auto; }
+        .nav-item { text-decoration: none; font-size: 16px; color: #9D9E9E; transition: color 0.3s; font-weight: 500; }
+        .nav-item:hover, .nav-item.active { color: #fff; }
+
+        .user-menu-container { position: relative; margin-left: 35px; padding-bottom: 10px; top: 5px; }
+        .user-avatar { width: 45px; height: 45px; border-radius: 50%; background-color: #28a745; color: #fff; display: flex; justify-content: center; align-items: center; font-size: 14px; font-weight: bold; cursor: pointer; transition: transform 0.2s; }
+        .user-menu-container:hover .user-avatar { transform: scale(1.1); }
+        .user-dropdown { display: none; position: absolute; top: 55px; right: -10px; width: 140px; background: rgba(31, 45, 53, 0.95); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); overflow: hidden; flex-direction: column; z-index: 9999; }
+        .user-menu-container:hover .user-dropdown { display: flex; animation: slideDown 0.2s ease-out; }
+        .dropdown-item { padding: 12px 20px; color: #ccc; text-decoration: none; font-size: 14px; transition: background 0.2s, color 0.2s; text-align: center; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .dropdown-item.logout { color: #ff6b6b; }
+        .dropdown-item.logout:hover { background: rgba(220, 53, 69, 0.2); }
+
+        /* --- 3. 主内容区 --- */
+        .main-container {
+            margin-top: 120px;
+            width: 90%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 50px;
+            flex: 1;
+        }
+
+        .filter-bar { background: rgba(31, 45, 53, 0.8); backdrop-filter: blur(10px); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 20px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); flex-wrap: wrap; }
+        .filter-input, .filter-select { background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255,255,255,0.2); color: #fff; padding: 10px 15px; border-radius: 6px; outline: none; font-size: 14px; }
+        select option { background-color: #1F2D35; color: #fff; }
+        .search-btn { background-color: #17a2b8; color: white; border: none; padding: 10px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s; margin-left: auto; }
+        .add-btn-small { background-color: #28a745; color: white; border: none; padding: 10px 25px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: all 0.3s; margin-left: 10px; }
+
+        /* --- 4. 列表容器 --- */
+        .list-container { background: rgba(31, 45, 53, 0.6); backdrop-filter: blur(15px); border-radius: 15px; border: 1px solid rgba(255, 255, 255, 0.1); padding: 20px; min-height: 500px; position: relative; overflow: visible; }
+        .empty-state { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; }
+        .no-match { text-align: center; color: rgba(255,255,255,0.5); animation: fadeIn 0.5s; }
+        .reset-btn { margin-top: 15px; padding: 8px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 4px; cursor: pointer; transition: all 0.3s; }
+        .add-btn-large { display: block; width: 200px; height: 200px; border-radius: 20px; background: rgba(40, 167, 69, 0.15); border: 2px dashed #28a745; color: #28a745; font-size: 18px; font-weight: bold; cursor: pointer; transition: all 0.3s; display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 15px; }
+        .add-btn-large:hover { background: rgba(40, 167, 69, 0.3); transform: scale(1.05); }
+
+        table { width: 100%; border-collapse: separate; border-spacing: 0 10px; }
+        th { text-align: left; color: #9D9E9E; font-size: 14px; padding: 10px 20px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        tr.data-row { background: rgba(255, 255, 255, 0.05); transition: background 0.2s; position: relative; }
+        tr.data-row:hover { background: rgba(255, 255, 255, 0.15); }
+        td { padding: 15px 20px; vertical-align: middle; color: #fff; font-size: 15px; }
+        td:first-child { border-top-left-radius: 10px; border-bottom-left-radius: 10px; }
+        td:last-child { border-top-right-radius: 10px; border-bottom-right-radius: 10px; text-align: right; }
+        .table-avatar { width: 40px; height: 40px; border-radius: 50%; object-fit: cover; border: 2px solid rgba(255,255,255,0.2); background: #000; }
+        .dept-tag { padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; display: inline-block; }
+        .dept-assault { background: rgba(220, 53, 69, 0.3); color: #ff6b6b; border: 1px solid rgba(220, 53, 69, 0.5); }
+        .dept-support { background: rgba(40, 167, 69, 0.3); color: #51cf66; border: 1px solid rgba(40, 167, 69, 0.5); }
+        .dept-engineer { background: rgba(255, 193, 7, 0.3); color: #fcc419; border: 1px solid rgba(255, 193, 7, 0.5); }
+        .dept-recon { background: rgba(23, 162, 184, 0.3); color: #66d9e8; border: 1px solid rgba(23, 162, 184, 0.5); }
+        .major-text { color: #aaa; font-size: 13px; font-family: 'Consolas', 'Courier New', monospace; letter-spacing: 1px; }
+
+        .more-btn { background: transparent; border: none; color: #fff; font-size: 20px; cursor: pointer; padding: 5px 10px; position: relative; z-index: 50; }
+        .action-menu { display: none; position: absolute; right: 10px; top: 40px; width: 140px; background: #1F2D35; border: 1px solid rgba(255,255,255,0.2); border-radius: 8px; box-shadow: 0 10px 30px rgba(0,0,0,0.8); z-index: 9999; flex-direction: column; overflow: hidden; }
+        .menu-item { display: block; padding: 10px 15px; color: #ddd; text-decoration: none; font-size: 14px; transition: background 0.2s; text-align: left; }
+        .menu-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .menu-item.danger { color: #ff6b6b; border-top: 1px solid rgba(255,255,255,0.1); }
+        .menu-item.danger:hover { background: rgba(220, 53, 69, 0.2); }
+
+        /* --- 5. 弹窗通用样式 --- */
+        .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(5px); z-index: 2000; justify-content: center; align-items: center; }
+        .modal-box { width: 500px; background: #1F2D35; border-radius: 15px; border: 1px solid rgba(255,255,255,0.2); padding: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); position: relative; animation: fadeIn 0.3s ease-out; }
+        .modal-title { font-size: 24px; font-weight: bold; margin-bottom: 25px; text-align: center; color: #fff; letter-spacing: 1px; }
+        .close-modal { position: absolute; top: 15px; right: 20px; font-size: 24px; color: #aaa; cursor: pointer; }
+        .close-modal:hover { color: #fff; }
+        .form-group { margin-bottom: 20px; }
+        .form-label { display: block; margin-bottom: 8px; font-size: 14px; color: #ccc; }
+        .form-input { width: 100%; padding: 12px; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.2); border-radius: 6px; color: #fff; outline: none; }
+        .form-submit { width: 100%; padding: 12px; background: #28a745; color: #fff; border: none; border-radius: 6px; font-size: 16px; font-weight: bold; cursor: pointer; margin-top: 10px; }
+        .form-submit.btn-transfer { background: #17a2b8; }
+        .form-submit.btn-transfer:hover { background: #138496; }
+        .form-submit.btn-update { background: #ffc107; color: #000; }
+        .form-submit.btn-update:hover { background: #e0a800; }
+
+        .avatar-upload-area { width: 120px; height: 120px; margin: 0 auto 20px auto; border-radius: 50%; background: rgba(255,255,255,0.05); border: 2px dashed rgba(255,255,255,0.2); position: relative; cursor: pointer; overflow: hidden; }
+        .avatar-preview-img { width: 100%; height: 100%; object-fit: cover; display: none; }
+        .upload-placeholder { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; font-size: 12px; color: #888; pointer-events: none; }
+
+        .modal-box.danger-mode { border: 2px solid #dc3545; box-shadow: 0 0 50px rgba(220, 53, 69, 0.3); width: 400px; text-align: center; }
+        .danger-title { color: #dc3545; font-size: 28px; font-weight: 900; margin-bottom: 20px; }
+        .danger-text { color: #ddd; margin-bottom: 30px; }
+        .danger-btn-group { display: flex; gap: 15px; }
+        .btn-cancel { flex: 1; padding: 12px; background: rgba(255,255,255,0.1); color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+        .btn-confirm-fire { flex: 1; padding: 12px; background: #dc3545; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
+        .form-input:disabled { background: rgba(255,255,255,0.05); color: #666; cursor: not-allowed; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .footer-copyright { text-align: center; color: rgba(255, 255, 255, 0.3); font-size: 12px; padding: 30px 0; width: 100%; flex-shrink: 0; }
+    </style>
+</head>
+<body>
+<video autoplay muted loop id="bg-video"><source src="${pageContext.request.contextPath}/assets/bg_video.mp4" type="video/mp4"></video>
+
+<nav class="navbar">
+    <div class="nav-left"><img src="${pageContext.request.contextPath}/assets/logo_bg.png" alt="Logo" class="logo-img"></div>
+    <div class="nav-right">
+        <a href="main.jsp" class="nav-item">首页</a>
+        <a href="${pageContext.request.contextPath}/listStudent" class="nav-item active">人事管理</a>
+        <a href="${pageContext.request.contextPath}/missionDispatch" class="nav-item">任务派遣</a>
+        <a href="${pageContext.request.contextPath}/financeList" class="nav-item">财务报销</a>
+        <a href="${pageContext.request.contextPath}/materialList" class="nav-item">物资申领</a>
+        <a href="${pageContext.request.contextPath}/attendanceList" class="nav-item">考勤打卡</a>
+        <a href="#" class="nav-item">社区中心</a>
+        <a href="#" class="nav-item">帮助</a>
+        <div class="user-menu-container">
+            <div class="user-avatar" onclick="location.href='mine.jsp'">CMD</div>
+            <div class="user-dropdown">
+                <a href="mine.jsp" class="dropdown-item">👤 个人中心</a>
+                <a href="#" class="dropdown-item">⚙️ 系统设置</a>
+                <a href="login.jsp" class="dropdown-item logout">🛑 退出登录</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="main-container">
+    <form action="${pageContext.request.contextPath}/listStudent" method="get" class="filter-bar">
+        <select name="department" class="filter-select">
+            <option value="">所有部门</option>
+            <option value="突击" ${searchDept == '突击' ? 'selected' : ''}>突击部</option>
+            <option value="支援" ${searchDept == '支援' ? 'selected' : ''}>支援部</option>
+            <option value="工程" ${searchDept == '工程' ? 'selected' : ''}>工程部</option>
+            <option value="侦察" ${searchDept == '侦察' ? 'selected' : ''}>侦察部</option>
+        </select>
+        <select name="gender" class="filter-select">
+            <option value="">性别</option>
+            <option value="男" ${searchGender == '男' ? 'selected' : ''}>男</option>
+            <option value="女" ${searchGender == '女' ? 'selected' : ''}>女</option>
+        </select>
+        <input type="text" name="id" value="${searchId}" placeholder="干员编号" class="filter-input" style="width: 120px;">
+        <input type="number" name="age" value="${searchAge}" placeholder="年龄" class="filter-input" style="width: 100px;">
+        <button type="submit" class="search-btn">搜索</button>
+        <button type="button" class="add-btn-small" onclick="openAddModal()">+ 新增</button>
+    </form>
+
+    <div class="list-container">
+        <c:choose>
+            <c:when test="${not empty list}">
+                <table>
+                    <thead>
+                    <tr>
+                        <th width="80">照片</th>
+                        <th width="80">编号</th>
+                        <th>姓名</th>
+                        <th width="80">性别</th>
+                        <th>所属部门</th>
+                        <th>战术专长</th>
+                        <th>年龄</th>
+                        <th width="50">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${list}" var="stu">
+                        <tr class="data-row">
+                            <td><img src="${pageContext.request.contextPath}/${stu.avatar != null ? stu.avatar : 'assets/avatar_default.png'}" class="table-avatar"></td>
+                            <td>${stu.id}</td>
+                            <td><strong>${stu.name}</strong></td>
+                            <td>${stu.gender}</td>
+                            <td>
+                                <c:choose>
+                                    <c:when test="${stu.department == '突击'}"><span class="dept-tag dept-assault">突击部</span></c:when>
+                                    <c:when test="${stu.department == '支援'}"><span class="dept-tag dept-support">支援部</span></c:when>
+                                    <c:when test="${stu.department == '工程'}"><span class="dept-tag dept-engineer">工程部</span></c:when>
+                                    <c:when test="${stu.department == '侦察'}"><span class="dept-tag dept-recon">侦察部</span></c:when>
+                                    <c:otherwise><span class="dept-tag" style="background:#555">待定</span></c:otherwise>
+                                </c:choose>
+                            </td>
+                            <td><span class="major-text">${stu.major}</span></td>
+                            <td>${stu.age}</td>
+                            <td class="action-cell">
+                                <button class="more-btn" onclick="toggleMenu('menu-${stu.id}', event)">•••</button>
+                                <div id="menu-${stu.id}" class="action-menu">
+                                    <a href="javascript:void(0)"
+                                       onclick="openUpdateModal('${stu.id}', '${stu.name}', '${stu.age}', '${stu.gender}', '${stu.department}', '${stu.major}', '${stu.avatar}')"
+                                       class="menu-item">
+                                        ✏️ 修改信息
+                                    </a>
+                                    <a href="javascript:void(0)" onclick="openTransferModal(${stu.id}, '${stu.name}', '${stu.department}')" class="menu-item">🔄 人事调动</a>
+                                    <a href="javascript:void(0)" onclick="openDeleteModal(${stu.id})" class="menu-item danger">⚠️ 解雇干员</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:when>
+            <c:otherwise>
+                <div class="empty-state">
+                    <c:choose>
+                        <c:when test="${not empty searchDept || not empty searchGender || not empty searchId || not empty searchAge}">
+                            <div class="no-match">
+                                <div class="no-match-icon">🔍</div>
+                                <div class="no-match-text">查无此人</div>
+                                <button class="reset-btn" onclick="location.href='${pageContext.request.contextPath}/listStudent'">重置筛选</button>
+                            </div>
+                        </c:when>
+                        <c:otherwise>
+                            <button class="add-btn-large" onclick="openAddModal()"><span>+</span>添加干员</button>
+                        </c:otherwise>
+                    </c:choose>
+                </div>
+            </c:otherwise>
+        </c:choose>
+    </div>
+</div>
+
+<div class="modal-overlay" id="addModal">
+    <div class="modal-box">
+        <span class="close-modal" onclick="closeAddModal()">×</span>
+        <div class="modal-title">新干员入列</div>
+        <form action="${pageContext.request.contextPath}/addStudent" method="post" enctype="multipart/form-data">
+            <div class="avatar-upload-area" onclick="document.getElementById('addFileInput').click()">
+                <div class="upload-placeholder" id="addPlaceHolder">点击上传<br>照片</div>
+                <img id="addAvatarPreview" class="avatar-preview-img">
+            </div>
+            <input type="file" name="avatarFile" id="addFileInput" style="display:none;" accept="image/*" onchange="previewImage(this, 'addAvatarPreview', 'addPlaceHolder')">
+
+            <div class="form-group"><label class="form-label">姓名</label><input type="text" name="name" class="form-input" required autocomplete="off"></div>
+            <div class="form-group">
+                <label class="form-label">部门</label>
+                <select name="department" class="form-input" style="cursor: pointer;">
+                    <option value="突击">突击部</option>
+                    <option value="支援">支援部</option>
+                    <option value="工程">工程部</option>
+                    <option value="侦察">侦察部</option>
+                </select>
+            </div>
+            <div class="form-group"><label class="form-label">性别</label><div style="display: flex; gap: 20px; color: #fff;"><label><input type="radio" name="gender" value="男" checked> 男</label><label><input type="radio" name="gender" value="女"> 女</label></div></div>
+            <div class="form-group"><label class="form-label">年龄</label><input type="number" name="age" class="form-input" required></div>
+            <div class="form-group"><label class="form-label">战术专长 (选填)</label><input type="text" name="major" class="form-input" placeholder="例如：动力外骨骼"></div>
+            <button type="submit" class="form-submit">确认提交</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="updateModal">
+    <div class="modal-box">
+        <span class="close-modal" onclick="closeUpdateModal()">×</span>
+        <div class="modal-title">档案修正</div>
+        <form action="${pageContext.request.contextPath}/updateStudent" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="id" id="updateId">
+            <input type="hidden" name="oldAvatar" id="updateOldAvatar">
+
+            <div class="avatar-upload-area" onclick="document.getElementById('updateFileInput').click()">
+                <img id="updateAvatarPreview" class="avatar-preview-img" style="display:block;">
+            </div>
+            <input type="file" name="avatarFile" id="updateFileInput" style="display:none;" accept="image/*" onchange="previewImage(this, 'updateAvatarPreview', null)">
+            <div style="text-align:center; font-size:12px; color:#666; margin-top:-10px; margin-bottom:15px;">点击图片更换</div>
+
+            <div class="form-group"><label class="form-label">姓名</label><input type="text" name="name" id="updateName" class="form-input" required></div>
+            <div class="form-group">
+                <label class="form-label">所属部门 (权限锁定：请申请人事调动)</label>
+                <input type="text" id="updateDeptDisplay" class="form-input" disabled style="color:#999;">
+                <input type="hidden" name="department" id="updateDeptHidden">
+            </div>
+            <div class="form-group">
+                <label class="form-label">性别</label>
+                <div style="display: flex; gap: 20px; color: #fff;">
+                    <label><input type="radio" name="gender" value="男" id="genderMan"> 男</label>
+                    <label><input type="radio" name="gender" value="女" id="genderWoman"> 女</label>
+                </div>
+            </div>
+            <div class="form-group"><label class="form-label">年龄</label><input type="number" name="age" id="updateAge" class="form-input" required></div>
+            <div class="form-group"><label class="form-label">战术专长</label><input type="text" name="major" id="updateMajor" class="form-input"></div>
+            <button type="submit" class="form-submit btn-update">保存修正</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="transferModal">
+    <div class="modal-box">
+        <span class="close-modal" onclick="closeTransferModal()">×</span>
+        <div class="modal-title">人事调动命令</div>
+        <form action="${pageContext.request.contextPath}/transferStudent" method="post">
+            <input type="hidden" name="id" id="transferId">
+            <div class="form-group"><label class="form-label">干员姓名 (锁定)</label><input type="text" id="transferName" class="form-input" disabled></div>
+            <div class="form-group"><label class="form-label">当前部门 (锁定)</label><input type="text" id="transferOldDept" class="form-input" disabled style="color: #999;"></div>
+            <div class="form-group">
+                <label class="form-label" style="color: #17a2b8; font-weight: bold;">调动至新部门 (开放权限)</label>
+                <select name="department" class="form-input" style="cursor: pointer; border-color: #17a2b8; background-color: #1F2D35; color: #fff;">
+                    <option value="突击">突击部</option>
+                    <option value="支援">支援部</option>
+                    <option value="工程">工程部</option>
+                    <option value="侦察">侦察部</option>
+                </select>
+            </div>
+            <button type="submit" class="form-submit btn-transfer">确认调动</button>
+        </form>
+    </div>
+</div>
+
+<div class="modal-overlay" id="deleteModal">
+    <div class="modal-box danger-mode">
+        <div class="danger-title">⚠️ 警告</div>
+        <div class="danger-text">确认要解雇该干员吗？<br>此操作不可逆，档案将被永久移除。</div>
+        <div class="danger-btn-group"><button class="btn-cancel" onclick="closeDeleteModal()">取消</button><button class="btn-confirm-fire" onclick="executeDelete()">确认解雇</button></div>
+    </div>
+</div>
+
+<div class="footer-copyright">
+    COPYRIGHT © 2024-2025 LRB&HJM. ALL RIGHTS RESERVED
+</div>
+
+<script>
+    function previewImage(input, imgId, placeholderId) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                var img = document.getElementById(imgId);
+                img.src = e.target.result;
+                img.style.display = 'block';
+                if(placeholderId) document.getElementById(placeholderId).style.display = 'none';
+            };
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    function toggleMenu(menuId, event) { event.stopPropagation(); var allMenus = document.getElementsByClassName('action-menu'); for (var i = 0; i < allMenus.length; i++) { if (allMenus[i].id !== menuId) allMenus[i].style.display = 'none'; } var menu = document.getElementById(menuId); menu.style.display = (menu.style.display === 'flex') ? 'none' : 'flex'; }
+    document.addEventListener('click', function() { var allMenus = document.getElementsByClassName('action-menu'); for (var i = 0; i < allMenus.length; i++) { allMenus[i].style.display = 'none'; } });
+
+    // 新增
+    function openAddModal() { document.getElementById('addModal').style.display = 'flex'; }
+    function closeAddModal() { document.getElementById('addModal').style.display = 'none'; }
+
+    // 修改 (核心逻辑)
+    function openUpdateModal(id, name, age, gender, dept, major, avatar) {
+        // 关闭菜单
+        var allMenus = document.getElementsByClassName('action-menu');
+        for (var i = 0; i < allMenus.length; i++) { allMenus[i].style.display = 'none'; }
+
+        // 填充数据
+        document.getElementById('updateId').value = id;
+        document.getElementById('updateName').value = name;
+        document.getElementById('updateAge').value = age;
+        document.getElementById('updateMajor').value = major;
+
+        // 部门
+        document.getElementById('updateDeptDisplay').value = dept;
+        document.getElementById('updateDeptHidden').value = dept;
+
+        // 性别
+        if(gender === '男') document.getElementById('genderMan').checked = true;
+        else document.getElementById('genderWoman').checked = true;
+
+        // 头像回显
+        var realAvatar = (avatar && avatar !== 'null' && avatar !== '') ?
+            '${pageContext.request.contextPath}/' + avatar :
+            '${pageContext.request.contextPath}/assets/avatar_default.png';
+        document.getElementById('updateAvatarPreview').src = realAvatar;
+
+        // 【核心修复】把旧头像路径存入隐藏域
+        // 你的 StudentUpdateServlet 需要 logic: if(file is empty) avatar = req.getParameter("oldAvatar");
+        document.getElementById('updateOldAvatar').value = (avatar && avatar !== 'null') ? avatar : 'assets/avatar_default.png';
+
+        document.getElementById('updateModal').style.display = 'flex';
+    }
+    function closeUpdateModal() { document.getElementById('updateModal').style.display = 'none'; }
+
+    // 调动
+    function openTransferModal(id, name, currentDept) {
+        document.getElementById('transferModal').style.display = 'flex';
+        document.getElementById('transferId').value = id;
+        document.getElementById('transferName').value = name;
+        document.getElementById('transferOldDept').value = currentDept;
+        var allMenus = document.getElementsByClassName('action-menu');
+        for (var i = 0; i < allMenus.length; i++) { allMenus[i].style.display = 'none'; }
+    }
+    function closeTransferModal() { document.getElementById('transferModal').style.display = 'none'; }
+
+    // 删除
+    let deleteTargetId = null;
+    function openDeleteModal(id) { deleteTargetId = id; document.getElementById('deleteModal').style.display = 'flex'; var allMenus = document.getElementsByClassName('action-menu'); for (var i = 0; i < allMenus.length; i++) { allMenus[i].style.display = 'none'; } }
+    function closeDeleteModal() { document.getElementById('deleteModal').style.display = 'none'; deleteTargetId = null; }
+    function executeDelete() { if (deleteTargetId) location.href = '${pageContext.request.contextPath}/deleteStudent?id=' + deleteTargetId; }
+
+    window.onclick = function(event) {
+        if (event.target == document.getElementById('addModal')) closeAddModal();
+        if (event.target == document.getElementById('deleteModal')) closeDeleteModal();
+        if (event.target == document.getElementById('transferModal')) closeTransferModal();
+        if (event.target == document.getElementById('updateModal')) closeUpdateModal();
+    }
+</script>
+</body>
+</html>

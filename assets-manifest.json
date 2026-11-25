@@ -1,0 +1,716 @@
+{
+  "assetBase": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms",
+  "uploadDir": "hrms/upload/",
+  "defaultAvatar": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/assetsavatar_default.png",
+  "note": "静态资源上传到 uniCloud 云存储 hrms/ 目录；用户动态上传的头像存 hrms/upload/ 目录。",
+  "count": 101,
+  "files": [
+    {
+      "file": "0433d4637ed659b970665a5dfe21cfc.jpg",
+      "cloudPath": "hrms/0433d4637ed659b970665a5dfe21cfc.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/0433d4637ed659b970665a5dfe21cfc.jpg",
+      "bytes": 136881,
+      "md5": "fcc16783afd51d119669c7682bf07ea9"
+    },
+    {
+      "file": "05a8e144987ac9d5afbd1d879a2e7fd.jpg",
+      "cloudPath": "hrms/05a8e144987ac9d5afbd1d879a2e7fd.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/05a8e144987ac9d5afbd1d879a2e7fd.jpg",
+      "bytes": 431207,
+      "md5": "c0df78471d234aafbf7a717e77919dcc"
+    },
+    {
+      "file": "05b289a3063ccd97e4daa7268da63e9.jpg",
+      "cloudPath": "hrms/05b289a3063ccd97e4daa7268da63e9.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/05b289a3063ccd97e4daa7268da63e9.jpg",
+      "bytes": 394422,
+      "md5": "859fb96d5076893f7b559e05fb252229"
+    },
+    {
+      "file": "07ada0c32670639cff3b8beb923c8e2.jpg",
+      "cloudPath": "hrms/07ada0c32670639cff3b8beb923c8e2.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/07ada0c32670639cff3b8beb923c8e2.jpg",
+      "bytes": 431151,
+      "md5": "3dd7a234aef4b4b411fc239b725820d1"
+    },
+    {
+      "file": "0b9ba66206db0928816203d88fa4a62.jpg",
+      "cloudPath": "hrms/0b9ba66206db0928816203d88fa4a62.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/0b9ba66206db0928816203d88fa4a62.jpg",
+      "bytes": 199778,
+      "md5": "71165eeea5a824ca580939fe939049ec"
+    },
+    {
+      "file": "0c1649803c061de993baae136084bed.jpg",
+      "cloudPath": "hrms/0c1649803c061de993baae136084bed.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/0c1649803c061de993baae136084bed.jpg",
+      "bytes": 257739,
+      "md5": "2f9fb4420f668fccbc86ade51122c6fd"
+    },
+    {
+      "file": "0d9f9f8fa45a71e63de2f7b1bf7a756.jpg",
+      "cloudPath": "hrms/0d9f9f8fa45a71e63de2f7b1bf7a756.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/0d9f9f8fa45a71e63de2f7b1bf7a756.jpg",
+      "bytes": 313407,
+      "md5": "9b65906ac4d23e0381f56f90c1e1dd22"
+    },
+    {
+      "file": "12c0f90dcbff2b2eddfca7edba2b72f.jpg",
+      "cloudPath": "hrms/12c0f90dcbff2b2eddfca7edba2b72f.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/12c0f90dcbff2b2eddfca7edba2b72f.jpg",
+      "bytes": 435195,
+      "md5": "a995419b76592a4d669e56fb9baab499"
+    },
+    {
+      "file": "13fda3bcb5d7ee5249ba1bdd377d209.jpg",
+      "cloudPath": "hrms/13fda3bcb5d7ee5249ba1bdd377d209.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/13fda3bcb5d7ee5249ba1bdd377d209.jpg",
+      "bytes": 384160,
+      "md5": "e6c139d4c913e5108340fa7b0d697fcd"
+    },
+    {
+      "file": "1b7b4908e102d4c92b2198c9c3bc530.jpg",
+      "cloudPath": "hrms/1b7b4908e102d4c92b2198c9c3bc530.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/1b7b4908e102d4c92b2198c9c3bc530.jpg",
+      "bytes": 411903,
+      "md5": "6937b3ff2e25be9329cd9af904ed57d6"
+    },
+    {
+      "file": "25549733b0d87cd125b91e47c960e3f.jpg",
+      "cloudPath": "hrms/25549733b0d87cd125b91e47c960e3f.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/25549733b0d87cd125b91e47c960e3f.jpg",
+      "bytes": 374480,
+      "md5": "ce4c4b5f478abdf810fd47cc54ff7055"
+    },
+    {
+      "file": "28e88f1690d477a445e9d5b4f562b61.jpg",
+      "cloudPath": "hrms/28e88f1690d477a445e9d5b4f562b61.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/28e88f1690d477a445e9d5b4f562b61.jpg",
+      "bytes": 450485,
+      "md5": "0deb3507f24048b372a9384401055e55"
+    },
+    {
+      "file": "328ef2fdbebb79442f904205ee41a97.jpg",
+      "cloudPath": "hrms/328ef2fdbebb79442f904205ee41a97.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/328ef2fdbebb79442f904205ee41a97.jpg",
+      "bytes": 319459,
+      "md5": "9937830a957e9031315ec1e7ab920120"
+    },
+    {
+      "file": "36fcb568b0fc95b071f8b6eab5340e9.jpg",
+      "cloudPath": "hrms/36fcb568b0fc95b071f8b6eab5340e9.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/36fcb568b0fc95b071f8b6eab5340e9.jpg",
+      "bytes": 511376,
+      "md5": "970b9d1b9448b4e06c90554d05c5379b"
+    },
+    {
+      "file": "3a11e9faff1ce01fbba1226147904a8.jpg",
+      "cloudPath": "hrms/3a11e9faff1ce01fbba1226147904a8.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/3a11e9faff1ce01fbba1226147904a8.jpg",
+      "bytes": 424298,
+      "md5": "decd507b8d3404e508f24cb684f1aacf"
+    },
+    {
+      "file": "3d77c95e5722528be15409018fee002.jpg",
+      "cloudPath": "hrms/3d77c95e5722528be15409018fee002.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/3d77c95e5722528be15409018fee002.jpg",
+      "bytes": 587321,
+      "md5": "2add9a3e9d320175cfe8ba40d9b74a67"
+    },
+    {
+      "file": "3d9a3525a5865b659966c61129283f7.jpg",
+      "cloudPath": "hrms/3d9a3525a5865b659966c61129283f7.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/3d9a3525a5865b659966c61129283f7.jpg",
+      "bytes": 259420,
+      "md5": "a1069ebcd106f91c39b9ba070c840985"
+    },
+    {
+      "file": "3e21175d7a7464a4e2843a7a774eab2.jpg",
+      "cloudPath": "hrms/3e21175d7a7464a4e2843a7a774eab2.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/3e21175d7a7464a4e2843a7a774eab2.jpg",
+      "bytes": 601899,
+      "md5": "ce118d801f78a153c311e63e196cac9a"
+    },
+    {
+      "file": "3fad7545a69fcde369aa4693c356899.jpg",
+      "cloudPath": "hrms/3fad7545a69fcde369aa4693c356899.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/3fad7545a69fcde369aa4693c356899.jpg",
+      "bytes": 403068,
+      "md5": "078e3606e6ef836a7dd2a240c81659f0"
+    },
+    {
+      "file": "4491a1921c29b1f5ef0240296fae28a.jpg",
+      "cloudPath": "hrms/4491a1921c29b1f5ef0240296fae28a.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/4491a1921c29b1f5ef0240296fae28a.jpg",
+      "bytes": 198924,
+      "md5": "4c66f064792edbbb396c9a11188ba5fa"
+    },
+    {
+      "file": "454792302e9bba88e8f97bac6e5d05c.jpg",
+      "cloudPath": "hrms/454792302e9bba88e8f97bac6e5d05c.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/454792302e9bba88e8f97bac6e5d05c.jpg",
+      "bytes": 411232,
+      "md5": "58d755e0d4256bf5664e5629c5748ccb"
+    },
+    {
+      "file": "4999f5cbd59e775b4a8816be8f8937c.jpg",
+      "cloudPath": "hrms/4999f5cbd59e775b4a8816be8f8937c.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/4999f5cbd59e775b4a8816be8f8937c.jpg",
+      "bytes": 412110,
+      "md5": "624c4b00bbee5b068945034619941e11"
+    },
+    {
+      "file": "4d4261fd5a69b2f105d32a3a840f1d9.jpg",
+      "cloudPath": "hrms/4d4261fd5a69b2f105d32a3a840f1d9.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/4d4261fd5a69b2f105d32a3a840f1d9.jpg",
+      "bytes": 418628,
+      "md5": "0fc56a932aaf948d89b3a8d4aa6f9e25"
+    },
+    {
+      "file": "4eb2bd8831d195a78787f8a0c7a7221.jpg",
+      "cloudPath": "hrms/4eb2bd8831d195a78787f8a0c7a7221.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/4eb2bd8831d195a78787f8a0c7a7221.jpg",
+      "bytes": 442253,
+      "md5": "76c2eec927fabdec958e4ae3e0f38197"
+    },
+    {
+      "file": "51c8ba0303fadd5bc65e392f4f2461e.jpg",
+      "cloudPath": "hrms/51c8ba0303fadd5bc65e392f4f2461e.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/51c8ba0303fadd5bc65e392f4f2461e.jpg",
+      "bytes": 321647,
+      "md5": "18e94b77dc8d89a229ed08e5db96fec0"
+    },
+    {
+      "file": "5cdf1f73befac6f6331938b51a77fd5.jpg",
+      "cloudPath": "hrms/5cdf1f73befac6f6331938b51a77fd5.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/5cdf1f73befac6f6331938b51a77fd5.jpg",
+      "bytes": 171067,
+      "md5": "b54389b01e8f6803ae33e7cd725f3f14"
+    },
+    {
+      "file": "638c520034bc6c366def49b26b40a48.jpg",
+      "cloudPath": "hrms/638c520034bc6c366def49b26b40a48.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/638c520034bc6c366def49b26b40a48.jpg",
+      "bytes": 313780,
+      "md5": "f62a4fedddfd03420444d3064528ed4a"
+    },
+    {
+      "file": "63a3ae58a59e4ccb21dfb859af5ad49.jpg",
+      "cloudPath": "hrms/63a3ae58a59e4ccb21dfb859af5ad49.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/63a3ae58a59e4ccb21dfb859af5ad49.jpg",
+      "bytes": 147645,
+      "md5": "7562381635071c2b9a29b17887b9e2a8"
+    },
+    {
+      "file": "6f71abd70ac1cbceec8cbbcd7c0a4cb.jpg",
+      "cloudPath": "hrms/6f71abd70ac1cbceec8cbbcd7c0a4cb.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/6f71abd70ac1cbceec8cbbcd7c0a4cb.jpg",
+      "bytes": 371228,
+      "md5": "92cf70f5abb9ee6bf4f7bff47fc10648"
+    },
+    {
+      "file": "7158aa84fb4d71262dd5dc968044e56.jpg",
+      "cloudPath": "hrms/7158aa84fb4d71262dd5dc968044e56.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/7158aa84fb4d71262dd5dc968044e56.jpg",
+      "bytes": 263038,
+      "md5": "69e42e897f4d9dfda1c2db07d580c6f3"
+    },
+    {
+      "file": "716a1b7a3145ab33341ace1002b0849.jpg",
+      "cloudPath": "hrms/716a1b7a3145ab33341ace1002b0849.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/716a1b7a3145ab33341ace1002b0849.jpg",
+      "bytes": 610904,
+      "md5": "c26958b69a88c955491e18eb0bb9b65c"
+    },
+    {
+      "file": "77046d7aff28f02a0054beaf69e48cc.jpg",
+      "cloudPath": "hrms/77046d7aff28f02a0054beaf69e48cc.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/77046d7aff28f02a0054beaf69e48cc.jpg",
+      "bytes": 207719,
+      "md5": "5ba2f61df6729ced9fc6a18cb6bc4990"
+    },
+    {
+      "file": "78ab20350dfb7e88860b15e6bfccdbe.jpg",
+      "cloudPath": "hrms/78ab20350dfb7e88860b15e6bfccdbe.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/78ab20350dfb7e88860b15e6bfccdbe.jpg",
+      "bytes": 195895,
+      "md5": "1a419b63d2dbe47dd08c774b706cb1f0"
+    },
+    {
+      "file": "7f955dbf-4825-4d99-941a-9924d00f54e8.jpg",
+      "cloudPath": "hrms/7f955dbf-4825-4d99-941a-9924d00f54e8.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/7f955dbf-4825-4d99-941a-9924d00f54e8.jpg",
+      "bytes": 58733,
+      "md5": "70873c2dba12206b3863c3062c929eb8"
+    },
+    {
+      "file": "822b944d2c6fddeee3183d2d95c4602.jpg",
+      "cloudPath": "hrms/822b944d2c6fddeee3183d2d95c4602.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/822b944d2c6fddeee3183d2d95c4602.jpg",
+      "bytes": 247397,
+      "md5": "88d208ae6e77824fdf6583bd7363beb1"
+    },
+    {
+      "file": "829d82aa777d8faf770a0ce6236905a.jpg",
+      "cloudPath": "hrms/829d82aa777d8faf770a0ce6236905a.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/829d82aa777d8faf770a0ce6236905a.jpg",
+      "bytes": 219339,
+      "md5": "b2cfdd9c9ee542b2fae8e14b1cfdf28b"
+    },
+    {
+      "file": "873a4099a32c33a8fa97b1cc38662fe.jpg",
+      "cloudPath": "hrms/873a4099a32c33a8fa97b1cc38662fe.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/873a4099a32c33a8fa97b1cc38662fe.jpg",
+      "bytes": 264542,
+      "md5": "3491e00c6c8355edc27c7e2f8792499e"
+    },
+    {
+      "file": "874d09305cbac5d78e8989b37245a66.jpg",
+      "cloudPath": "hrms/874d09305cbac5d78e8989b37245a66.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/874d09305cbac5d78e8989b37245a66.jpg",
+      "bytes": 615068,
+      "md5": "b2a83f18615c3677af5c881a8cd05147"
+    },
+    {
+      "file": "88f1174a3c0476568c8e0a8d4b966ff.jpg",
+      "cloudPath": "hrms/88f1174a3c0476568c8e0a8d4b966ff.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/88f1174a3c0476568c8e0a8d4b966ff.jpg",
+      "bytes": 381704,
+      "md5": "76ee6128159fa4a002ae89d1a3ac025f"
+    },
+    {
+      "file": "8a8ce8b30ea9e19640e3ff761431c62.jpg",
+      "cloudPath": "hrms/8a8ce8b30ea9e19640e3ff761431c62.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/8a8ce8b30ea9e19640e3ff761431c62.jpg",
+      "bytes": 219321,
+      "md5": "ff2438f9e17c47faf6193713927a43ed"
+    },
+    {
+      "file": "944bc9e1a743ccf1fa0af8151297dfa.jpg",
+      "cloudPath": "hrms/944bc9e1a743ccf1fa0af8151297dfa.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/944bc9e1a743ccf1fa0af8151297dfa.jpg",
+      "bytes": 392689,
+      "md5": "9ef83e489a9f5d43659207f447b00dd7"
+    },
+    {
+      "file": "970d5b52f1f09d325a08ffe16f50acd.jpg",
+      "cloudPath": "hrms/970d5b52f1f09d325a08ffe16f50acd.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/970d5b52f1f09d325a08ffe16f50acd.jpg",
+      "bytes": 609392,
+      "md5": "898a1fa25eebf5c9561426621ed3fe44"
+    },
+    {
+      "file": "980bff70ac079e2dca4c7257e8b9c6a.jpg",
+      "cloudPath": "hrms/980bff70ac079e2dca4c7257e8b9c6a.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/980bff70ac079e2dca4c7257e8b9c6a.jpg",
+      "bytes": 371404,
+      "md5": "dfa088d2a4ce6fad553460d7bc853ae9"
+    },
+    {
+      "file": "997f5bd6b29d1cb00ac8c27f7705cce.jpg",
+      "cloudPath": "hrms/997f5bd6b29d1cb00ac8c27f7705cce.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/997f5bd6b29d1cb00ac8c27f7705cce.jpg",
+      "bytes": 195680,
+      "md5": "668f694a1a98b76d6cb1d818d783ec1a"
+    },
+    {
+      "file": "a08cf16a7a2ea03ccc79e7428567dc4.jpg",
+      "cloudPath": "hrms/a08cf16a7a2ea03ccc79e7428567dc4.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/a08cf16a7a2ea03ccc79e7428567dc4.jpg",
+      "bytes": 409346,
+      "md5": "fe50d97d4c2dfa18977177851200b5a1"
+    },
+    {
+      "file": "a2c799cf022c08f3a488231932e32e6.jpg",
+      "cloudPath": "hrms/a2c799cf022c08f3a488231932e32e6.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/a2c799cf022c08f3a488231932e32e6.jpg",
+      "bytes": 446150,
+      "md5": "6d780ceb7fcc49b576d893075792ec35"
+    },
+    {
+      "file": "a4f9bfea35256db503204391129afda.jpg",
+      "cloudPath": "hrms/a4f9bfea35256db503204391129afda.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/a4f9bfea35256db503204391129afda.jpg",
+      "bytes": 249626,
+      "md5": "05b8a89fd7e1f69a1e4d0abdaa1e17b9"
+    },
+    {
+      "file": "acf42d657e9a5a8773664a6d35ced57.jpg",
+      "cloudPath": "hrms/acf42d657e9a5a8773664a6d35ced57.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/acf42d657e9a5a8773664a6d35ced57.jpg",
+      "bytes": 443980,
+      "md5": "f47ebcf9b4d11f2a313cc10158bef337"
+    },
+    {
+      "file": "ae755483e03996693a0f4f11f75927c.jpg",
+      "cloudPath": "hrms/ae755483e03996693a0f4f11f75927c.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/ae755483e03996693a0f4f11f75927c.jpg",
+      "bytes": 392671,
+      "md5": "802af41a6515e1d89b92fde696e3f2db"
+    },
+    {
+      "file": "assetsavatar_default.png",
+      "cloudPath": "hrms/assetsavatar_default.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/assetsavatar_default.png",
+      "bytes": 434305,
+      "md5": "ab726efc371c8f9dcd2fd2e1c7726eda"
+    },
+    {
+      "file": "avatar_31725b6b-4e6b-4294-abcc-fcfb4b2f490d.jpg",
+      "cloudPath": "hrms/avatar_31725b6b-4e6b-4294-abcc-fcfb4b2f490d.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_31725b6b-4e6b-4294-abcc-fcfb4b2f490d.jpg",
+      "bytes": 58733,
+      "md5": "70873c2dba12206b3863c3062c929eb8"
+    },
+    {
+      "file": "avatar_44d71367-cb32-4743-8eb9-ffbd61f66bb2.png",
+      "cloudPath": "hrms/avatar_44d71367-cb32-4743-8eb9-ffbd61f66bb2.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_44d71367-cb32-4743-8eb9-ffbd61f66bb2.png",
+      "bytes": 223134,
+      "md5": "9cdbb2d6f5fb2840c99ec0f8460269ee"
+    },
+    {
+      "file": "avatar_9eb7527f-3f84-4df3-bcd2-76c11dbd39be.jpg",
+      "cloudPath": "hrms/avatar_9eb7527f-3f84-4df3-bcd2-76c11dbd39be.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_9eb7527f-3f84-4df3-bcd2-76c11dbd39be.jpg",
+      "bytes": 58733,
+      "md5": "70873c2dba12206b3863c3062c929eb8"
+    },
+    {
+      "file": "avatar_aede09fb-2c3f-41ab-9a2d-df4d4d316082.jpg",
+      "cloudPath": "hrms/avatar_aede09fb-2c3f-41ab-9a2d-df4d4d316082.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_aede09fb-2c3f-41ab-9a2d-df4d4d316082.jpg",
+      "bytes": 411903,
+      "md5": "6937b3ff2e25be9329cd9af904ed57d6"
+    },
+    {
+      "file": "avatar_bit.png",
+      "cloudPath": "hrms/avatar_bit.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_bit.png",
+      "bytes": 223134,
+      "md5": "9cdbb2d6f5fb2840c99ec0f8460269ee"
+    },
+    {
+      "file": "avatar_c527837a-b24f-4029-bcb6-e39dc9041604.jpg",
+      "cloudPath": "hrms/avatar_c527837a-b24f-4029-bcb6-e39dc9041604.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_c527837a-b24f-4029-bcb6-e39dc9041604.jpg",
+      "bytes": 411903,
+      "md5": "6937b3ff2e25be9329cd9af904ed57d6"
+    },
+    {
+      "file": "avatar_c6e65055-6d77-4e0d-ae4e-f5e1ffe45223.jpg",
+      "cloudPath": "hrms/avatar_c6e65055-6d77-4e0d-ae4e-f5e1ffe45223.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_c6e65055-6d77-4e0d-ae4e-f5e1ffe45223.jpg",
+      "bytes": 411903,
+      "md5": "6937b3ff2e25be9329cd9af904ed57d6"
+    },
+    {
+      "file": "avatar_deepbule.png",
+      "cloudPath": "hrms/avatar_deepbule.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_deepbule.png",
+      "bytes": 230871,
+      "md5": "f6720cc01a5d1ce7f1ca85064671b02c"
+    },
+    {
+      "file": "avatar_dunxiong.png",
+      "cloudPath": "hrms/avatar_dunxiong.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_dunxiong.png",
+      "bytes": 265368,
+      "md5": "553dea304a2085832dd58e0b93879a2a"
+    },
+    {
+      "file": "avatar_gu.png",
+      "cloudPath": "hrms/avatar_gu.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_gu.png",
+      "bytes": 236746,
+      "md5": "966dff57337c708f271bd0918214f27b"
+    },
+    {
+      "file": "avatar_hackclaw.png",
+      "cloudPath": "hrms/avatar_hackclaw.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_hackclaw.png",
+      "bytes": 209657,
+      "md5": "4973fdb63e4da2bc458a2f63db6ccb19"
+    },
+    {
+      "file": "avatar_hajifeng.png",
+      "cloudPath": "hrms/avatar_hajifeng.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_hajifeng.png",
+      "bytes": 234116,
+      "md5": "49d52a9d213ed495109eae0406404a70"
+    },
+    {
+      "file": "avatar_kai.png",
+      "cloudPath": "hrms/avatar_kai.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_kai.png",
+      "bytes": 207333,
+      "md5": "2e3f5d23e330395f3e4742eaa66ea865"
+    },
+    {
+      "file": "avatar_luckybearhjb.png",
+      "cloudPath": "hrms/avatar_luckybearhjb.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_luckybearhjb.png",
+      "bytes": 323638,
+      "md5": "9ae099889a0b8098607d9df3f64e0228"
+    },
+    {
+      "file": "avatar_luna.png",
+      "cloudPath": "hrms/avatar_luna.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_luna.png",
+      "bytes": 246454,
+      "md5": "c503cb755b1760ca83cf248ee5ee17d7"
+    },
+    {
+      "file": "avatar_noname.png",
+      "cloudPath": "hrms/avatar_noname.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_noname.png",
+      "bytes": 222147,
+      "md5": "1df3d5acb553cacff32bcd1ecab26d57"
+    },
+    {
+      "file": "avatar_roy.png",
+      "cloudPath": "hrms/avatar_roy.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_roy.png",
+      "bytes": 216646,
+      "md5": "b287c1c7d6d7981e6304986640bf8473"
+    },
+    {
+      "file": "avatar_shepherd.png",
+      "cloudPath": "hrms/avatar_shepherd.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_shepherd.png",
+      "bytes": 197478,
+      "md5": "85cf5218bc5a98101b53bc1a8ecb5075"
+    },
+    {
+      "file": "avatar_silverwing.png",
+      "cloudPath": "hrms/avatar_silverwing.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_silverwing.png",
+      "bytes": 262862,
+      "md5": "b1b99e3a6a2e555c6c35606210a4beaa"
+    },
+    {
+      "file": "avatar_szdwovlf.png",
+      "cloudPath": "hrms/avatar_szdwovlf.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_szdwovlf.png",
+      "bytes": 259809,
+      "md5": "ff3693d29690d01a449e42937bce2775"
+    },
+    {
+      "file": "avatar_weilong.png",
+      "cloudPath": "hrms/avatar_weilong.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_weilong.png",
+      "bytes": 224983,
+      "md5": "36de0f469b8c764feef55adb5e665020"
+    },
+    {
+      "file": "avatar_weixiong.png",
+      "cloudPath": "hrms/avatar_weixiong.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_weixiong.png",
+      "bytes": 428534,
+      "md5": "1195d5f032beec8243d86e472ef8b05b"
+    },
+    {
+      "file": "avatar_wind.png",
+      "cloudPath": "hrms/avatar_wind.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_wind.png",
+      "bytes": 244869,
+      "md5": "adb055336da29142618cd5f963a3be8f"
+    },
+    {
+      "file": "avatar_wululu.png",
+      "cloudPath": "hrms/avatar_wululu.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_wululu.png",
+      "bytes": 214386,
+      "md5": "d879b960cd48f502cf190a38ca441760"
+    },
+    {
+      "file": "avatar_xionglulu.png",
+      "cloudPath": "hrms/avatar_xionglulu.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_xionglulu.png",
+      "bytes": 259706,
+      "md5": "689ff4ac1cbccd9bd02bdc7f63cf3514"
+    },
+    {
+      "file": "avatar_xiongming.png",
+      "cloudPath": "hrms/avatar_xiongming.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_xiongming.png",
+      "bytes": 291800,
+      "md5": "eb3b9172481fe24ffcd637358cb08555"
+    },
+    {
+      "file": "avatar_xiongna.png",
+      "cloudPath": "hrms/avatar_xiongna.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_xiongna.png",
+      "bytes": 253017,
+      "md5": "84989a4bebd67b7cd058268dffacb03e"
+    },
+    {
+      "file": "avatar_xiongxiaowen.png",
+      "cloudPath": "hrms/avatar_xiongxiaowen.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_xiongxiaowen.png",
+      "bytes": 380240,
+      "md5": "0934b7b502dae743bbd67ddc6e175be0"
+    },
+    {
+      "file": "avatar_xiongya.png",
+      "cloudPath": "hrms/avatar_xiongya.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_xiongya.png",
+      "bytes": 386166,
+      "md5": "65d1bc8ec496e8f39cafede0cd0dbec7"
+    },
+    {
+      "file": "avatar_xiongyi.png",
+      "cloudPath": "hrms/avatar_xiongyi.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/avatar_xiongyi.png",
+      "bytes": 346434,
+      "md5": "6c51b155ee76ca386e1ab509881abc3c"
+    },
+    {
+      "file": "b8602bc6833bff500e553c0c4d26f20.jpg",
+      "cloudPath": "hrms/b8602bc6833bff500e553c0c4d26f20.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/b8602bc6833bff500e553c0c4d26f20.jpg",
+      "bytes": 285421,
+      "md5": "f3be88745e7262bdb3fdbba599aafc7b"
+    },
+    {
+      "file": "bac0c5ccad1a62d286b9a476008f0a6.jpg",
+      "cloudPath": "hrms/bac0c5ccad1a62d286b9a476008f0a6.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bac0c5ccad1a62d286b9a476008f0a6.jpg",
+      "bytes": 557509,
+      "md5": "4e09efcdf4415889d4565808cd925562"
+    },
+    {
+      "file": "bd885e9654cbfcdaa86acf4fd773f1a.jpg",
+      "cloudPath": "hrms/bd885e9654cbfcdaa86acf4fd773f1a.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bd885e9654cbfcdaa86acf4fd773f1a.jpg",
+      "bytes": 249754,
+      "md5": "863587aabf25ff2ffe4d9ff44026bc54"
+    },
+    {
+      "file": "bg_video.mp4",
+      "cloudPath": "hrms/bg_video.mp4",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/bg_video.mp4",
+      "bytes": 35423920,
+      "md5": "db3a60677251e3cef79cc8f891869d93"
+    },
+    {
+      "file": "c5218392de8318100859e26ef3e6fb0.jpg",
+      "cloudPath": "hrms/c5218392de8318100859e26ef3e6fb0.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/c5218392de8318100859e26ef3e6fb0.jpg",
+      "bytes": 395517,
+      "md5": "637fe195b6f14a4da7704f4749c00414"
+    },
+    {
+      "file": "c6d1780de9723d45a820905fd19faf3.jpg",
+      "cloudPath": "hrms/c6d1780de9723d45a820905fd19faf3.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/c6d1780de9723d45a820905fd19faf3.jpg",
+      "bytes": 205101,
+      "md5": "2c47ddeedd5d319164de9e0894dfe87e"
+    },
+    {
+      "file": "c9a07ffa8fee1cb4323649af86dc342.jpg",
+      "cloudPath": "hrms/c9a07ffa8fee1cb4323649af86dc342.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/c9a07ffa8fee1cb4323649af86dc342.jpg",
+      "bytes": 369381,
+      "md5": "c96e3471050f809039e415780a877049"
+    },
+    {
+      "file": "d0c0d4b4fba8b0fbe86bb70280c5c78.jpg",
+      "cloudPath": "hrms/d0c0d4b4fba8b0fbe86bb70280c5c78.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/d0c0d4b4fba8b0fbe86bb70280c5c78.jpg",
+      "bytes": 42170,
+      "md5": "149c69f8bfed1f515bdbd3f7454366dc"
+    },
+    {
+      "file": "d16fb21c9fea0d435546f92860b4eb9.jpg",
+      "cloudPath": "hrms/d16fb21c9fea0d435546f92860b4eb9.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/d16fb21c9fea0d435546f92860b4eb9.jpg",
+      "bytes": 627517,
+      "md5": "12d91e2f4a8e94a465fc3c3d644f40c3"
+    },
+    {
+      "file": "d43ac1a1802070572c010cc01f09872.jpg",
+      "cloudPath": "hrms/d43ac1a1802070572c010cc01f09872.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/d43ac1a1802070572c010cc01f09872.jpg",
+      "bytes": 310358,
+      "md5": "97d79dc5e97d3794d5a0a232a037256c"
+    },
+    {
+      "file": "d43d814d99f6883d56ceceb2da11e76.jpg",
+      "cloudPath": "hrms/d43d814d99f6883d56ceceb2da11e76.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/d43d814d99f6883d56ceceb2da11e76.jpg",
+      "bytes": 330097,
+      "md5": "ab5f9dd217e08aca2ed01d2dcce0ff0b"
+    },
+    {
+      "file": "e8e532d41738faf48617e1193dc7e8d.jpg",
+      "cloudPath": "hrms/e8e532d41738faf48617e1193dc7e8d.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/e8e532d41738faf48617e1193dc7e8d.jpg",
+      "bytes": 385667,
+      "md5": "61077264ed1c902ddeca1b1b95cfa07c"
+    },
+    {
+      "file": "ec6cbff844a0fc4185c1dcbc5cca2ca.jpg",
+      "cloudPath": "hrms/ec6cbff844a0fc4185c1dcbc5cca2ca.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/ec6cbff844a0fc4185c1dcbc5cca2ca.jpg",
+      "bytes": 295908,
+      "md5": "04ddbf0ae5afebc008f453df39b69983"
+    },
+    {
+      "file": "ed2dea4e701eba09a6e75a3639d47ab.jpg",
+      "cloudPath": "hrms/ed2dea4e701eba09a6e75a3639d47ab.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/ed2dea4e701eba09a6e75a3639d47ab.jpg",
+      "bytes": 323887,
+      "md5": "0fce82c2f44c968fac5e9ac21a1ea288"
+    },
+    {
+      "file": "ef6104634e1d1e67cb3e791b6edcab6.jpg",
+      "cloudPath": "hrms/ef6104634e1d1e67cb3e791b6edcab6.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/ef6104634e1d1e67cb3e791b6edcab6.jpg",
+      "bytes": 263090,
+      "md5": "c0b57177dba592744ae793483f8f433f"
+    },
+    {
+      "file": "fbcb74f985c2c0eb9bb3ad6178b05cd.jpg",
+      "cloudPath": "hrms/fbcb74f985c2c0eb9bb3ad6178b05cd.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/fbcb74f985c2c0eb9bb3ad6178b05cd.jpg",
+      "bytes": 310814,
+      "md5": "719f1e12cd38ec229a6c8ce63993336a"
+    },
+    {
+      "file": "fce636dbc1ac575ee09befcfcfa1e7c.jpg",
+      "cloudPath": "hrms/fce636dbc1ac575ee09befcfcfa1e7c.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/fce636dbc1ac575ee09befcfcfa1e7c.jpg",
+      "bytes": 521534,
+      "md5": "f6c5bb9e520280151b4c429794efa134"
+    },
+    {
+      "file": "fd7a9e716b7a0518446d57d6d240cff.jpg",
+      "cloudPath": "hrms/fd7a9e716b7a0518446d57d6d240cff.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/fd7a9e716b7a0518446d57d6d240cff.jpg",
+      "bytes": 54740,
+      "md5": "400b95305c199965b3658efbe80c4828"
+    },
+    {
+      "file": "logo_bg.png",
+      "cloudPath": "hrms/logo_bg.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/logo_bg.png",
+      "bytes": 10219,
+      "md5": "07813a833cfe16576941dce4f3c70260"
+    },
+    {
+      "file": "map.jpg",
+      "cloudPath": "hrms/map.jpg",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/map.jpg",
+      "bytes": 1224647,
+      "md5": "b625e690118e0976f06473d9daf7550b"
+    },
+    {
+      "file": "modal_bg.png",
+      "cloudPath": "hrms/modal_bg.png",
+      "url": "https://env-00jy736zuxjd.normal.cloudstatic.cn/hrms/modal_bg.png",
+      "bytes": 556472,
+      "md5": "59d1a9f35a4aac96b933b33dcc0cc734"
+    }
+  ]
+}

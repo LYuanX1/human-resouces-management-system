@@ -1,0 +1,288 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>三角洲行动干员管理系统</title>
+  <style>
+    /* --- 全局重置 --- */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body, html { height: 100%; width: 100%; font-family: "Microsoft YaHei", sans-serif; overflow: hidden; }
+
+    /* --- 1. 背景视频 --- */
+    #bg-video {
+      position: fixed;
+      right: 0; bottom: 0;
+      min-width: 100%; min-height: 100%;
+      width: auto; height: auto;
+      z-index: -100;
+      object-fit: cover;
+      filter: brightness(0.7);
+    }
+
+    /* --- 2. 顶部导航栏 --- */
+    .navbar {
+      width: 100%;
+      height: 90px;
+      background-color: #1F2D35;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 40px;
+      position: absolute;
+      top: 0;
+      z-index: 10;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    /* 左侧 LOGO */
+    .nav-left .logo-img {
+      height: 65px;
+      width: auto;
+      display: block;
+    }
+
+    /* 右侧选项 */
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+      flex-direction: row-reverse;
+    }
+
+    .nav-item {
+      text-decoration: none;
+      font-size: 16px;
+      color: #9D9E9E;
+      transition: color 0.3s;
+      font-weight: 500;
+    }
+    .nav-item:hover { color: #fff; }
+
+    /* 登录按钮 */
+    .login-btn {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: #E8EBEB;
+      color: #1F2D35;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 13px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+    .login-btn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 15px rgba(232, 235, 235, 0.5);
+    }
+
+    /* --- 3. 中央大字 (保持上移35px) --- */
+    .hero-title {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      margin-top: -135px; /* 上移修正 */
+
+      color: #FFFFFF;
+      font-size: 64px;
+      font-weight: 900;
+      text-align: center;
+      letter-spacing: 4px;
+      text-shadow: 0 5px 15px rgba(0,0,0,0.8);
+      user-select: none;
+    }
+
+    /* --- 4. 登录弹窗 (海报适配版) --- */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(5px);
+      z-index: 100;
+    }
+
+    .login-modal {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+
+      width: 750px;
+      height: 420px;
+
+      border-radius: 20px;
+
+      background-image: url('${pageContext.request.contextPath}/assets/modal_bg.png');
+      background-size: cover;
+      background-position: center;
+
+      box-shadow: 0 30px 60px rgba(0,0,0,0.9);
+
+      display: flex;
+      justify-content: flex-end; /* 内容靠右 */
+      align-items: center;
+      padding-right: 50px;
+
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    /* 表单区域 (竖排) */
+    .form-content {
+      width: 280px;
+      background: rgba(14, 20, 24, 0.75);
+      backdrop-filter: blur(10px);
+      padding: 30px 25px;
+      border-radius: 12px;
+      display: flex;
+      flex-direction: column; /* 竖排 */
+      gap: 20px;
+      border: 1px solid rgba(255,255,255,0.1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .form-title {
+      color: #fff;
+      font-size: 18px;
+      text-align: center;
+      margin-bottom: 5px;
+      font-weight: bold;
+      letter-spacing: 2px;
+      border-bottom: 2px solid #28a745;
+      padding-bottom: 10px;
+      display: inline-block;
+    }
+
+    .input-box {
+      width: 100%;
+      padding: 12px 15px;
+      background: rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 6px;
+      outline: none;
+      color: #fff;
+      font-size: 14px;
+      transition: all 0.3s;
+    }
+    .input-box:focus {
+      border-color: #28a745;
+      background: rgba(0, 0, 0, 0.8);
+      box-shadow: 0 0 8px rgba(40, 167, 69, 0.3);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px 0;
+      background-color: #28a745;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 16px;
+      transition: all 0.3s;
+      margin-top: 10px;
+    }
+    .submit-btn:hover {
+      background-color: #218838;
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(40, 167, 69, 0.4);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 15px; right: 20px;
+      color: rgba(255,255,255,0.6);
+      font-size: 28px;
+      cursor: pointer;
+      z-index: 20;
+      transition: color 0.3s;
+    }
+    .close-btn:hover { color: #fff; }
+
+    @media (max-width: 800px) {
+      .login-modal {
+        width: 90%;
+        height: auto;
+        aspect-ratio: 16/9;
+        padding-right: 0;
+        justify-content: center;
+      }
+    }
+
+    /* --- 5. 底部版权信息 (新增) --- */
+    .footer-copyright {
+      position: absolute; /* 绝对定位在最底部 */
+      bottom: 20px;
+      width: 100%;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.5); /* 半透明白，不抢眼 */
+      font-size: 12px;
+      font-family: Arial, sans-serif;
+      letter-spacing: 1px; /* 增加字间距，更有设计感 */
+      text-shadow: 0 1px 2px rgba(0,0,0,0.8); /* 确保在视频背景上看得清 */
+      pointer-events: none; /* 让鼠标可以穿透文字点到背景 */
+      z-index: 5;
+    }
+  </style>
+</head>
+<body>
+
+<video autoplay muted loop id="bg-video">
+  <source src="${pageContext.request.contextPath}/assets/bg_video.mp4" type="video/mp4">
+</video>
+
+<nav class="navbar">
+  <div class="nav-left">
+    <img src="${pageContext.request.contextPath}/assets/logo_bg.png" alt="Logo" class="logo-img">
+  </div>
+  <div class="nav-right">
+    <div class="login-btn" onclick="openModal()">登录</div>
+    <a href="#" class="nav-item">帮助</a>
+    <a href="#" class="nav-item">首页</a>
+  </div>
+</nav>
+
+<h1 class="hero-title">三角洲行动干员管理系统</h1>
+
+<div class="footer-copyright">
+  COPYRIGHT © 2024-2025 LRB&HJM. ALL RIGHTS RESERVED
+</div>
+
+<div class="modal-overlay" id="loginModal">
+  <div class="login-modal">
+    <span class="close-btn" onclick="closeModal()">×</span>
+
+    <form action="${pageContext.request.contextPath}/login" method="post" class="form-content">
+      <div class="form-title">IDENTITY VERIFY</div>
+
+      <input type="text" name="username" class="input-box" placeholder="干员代号 (root)" required autocomplete="off">
+      <input type="password" name="password" class="input-box" placeholder="安全密钥 (root)" required>
+
+      <button type="submit" class="submit-btn">确认接入系统</button>
+    </form>
+  </div>
+</div>
+
+<script>
+  function openModal() {
+    document.getElementById('loginModal').style.display = 'block';
+  }
+  function closeModal() {
+    document.getElementById('loginModal').style.display = 'none';
+  }
+  window.onclick = function(event) {
+    var modal = document.getElementById('loginModal');
+    if (event.target == modal) {
+      modal.style.display = "none";
+    }
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,299 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>指挥中心 - 三角洲行动</title>
+    <style>
+        /* --- 全局重置 --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body, html { height: 100%; width: 100%; font-family: "Microsoft YaHei", sans-serif; overflow-x: hidden; }
+
+        /* --- 1. 背景设置 --- */
+        body {
+            /* 保留原有的背景设置 */
+            background-color: #0b1013;
+            /* 注意：背景视频不受影响，因为它有 position: fixed */
+            color: #fff;
+            margin: 0;
+
+            /* 【核心修改】开启 Flex 布局，垂直排列 */
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* 保证最小高度占满屏幕 */
+        }
+
+        #bg-video {
+            position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -100; object-fit: cover; filter: brightness(0.5);
+        }
+
+        /* --- 导航栏 (通用升级版) --- */
+        .navbar {
+            width: 100%; height: 90px; background-color: #1F2D35;
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 0 40px; position: fixed; top: 0; z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
+        .nav-left .logo-img { height: 65px; width: auto; display: block; }
+
+        /* 右侧容器：强制靠右，链接间距 25px */
+        .nav-right {
+            display: flex; align-items: center; gap: 25px; margin-left: auto;
+        }
+
+        /* 导航链接 */
+        .nav-item { text-decoration: none; font-size: 16px; color: #9D9E9E; transition: color 0.3s; font-weight: 500; }
+        .nav-item:hover, .nav-item.active { color: #fff; }
+
+        /* --- 头像菜单容器 (新增) --- */
+        .user-menu-container {
+            position: relative; /* 作为定位基准 */
+            margin-left: 35px;  /* 保持和文字链接的距离 */
+            padding-bottom: 10px; /* 增加底部热区，防止鼠标移向下拉框时消失 */
+            top: 5px; /* 微调垂直对齐 */
+        }
+
+        /* 头像本体 */
+        .user-avatar {
+            width: 45px; height: 45px; border-radius: 50%;
+            background-color: #28a745; color: #fff;
+            display: flex; justify-content: center; align-items: center;
+            font-size: 14px; font-weight: bold; cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .user-menu-container:hover .user-avatar { transform: scale(1.1); }
+
+        /* 下拉菜单 (悬停显示) */
+        .user-dropdown {
+            display: none; /* 默认隐藏 */
+            position: absolute;
+            top: 55px; /* 在头像正下方 */
+            right: -10px; /* 对齐右侧 */
+            width: 140px;
+            background: rgba(31, 45, 53, 0.95); /* 深色磨砂背景 */
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            overflow: hidden;
+            flex-direction: column;
+            z-index: 9999;
+        }
+
+        /* 鼠标悬停容器时，显示菜单 */
+        .user-menu-container:hover .user-dropdown { display: flex; animation: slideDown 0.2s ease-out; }
+
+        /* 菜单项 */
+        .dropdown-item {
+            padding: 12px 20px;
+            color: #ccc; text-decoration: none; font-size: 14px;
+            transition: background 0.2s, color 0.2s;
+            text-align: center;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        .dropdown-item:last-child { border-bottom: none; }
+        .dropdown-item:hover { background: rgba(255,255,255,0.1); color: #fff; }
+        .dropdown-item.logout { color: #ff6b6b; } /* 退出登录显示红色 */
+        .dropdown-item.logout:hover { background: rgba(220, 53, 69, 0.2); }
+
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        /* --- 3. 页面主体 --- */
+        .main-container, .main-content {
+            /* 保留你原有的边距设置 */
+            margin-top: 120px;
+            width: 90%;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+            padding-bottom: 20px;
+
+            /* 【核心修改】flex: 1 让这个容器占据所有剩余高度 */
+            /* 这就是把版权信息“挤”到最底下的关键 */
+
+        /* --- 4. 仪表盘大框 --- */
+        .dashboard-panel {
+            width: 100%; max-width: 1050px; height: 450px; /* 稍微加高一点，给地图留空间 */
+            background: rgba(31, 45, 53, 0.7); backdrop-filter: blur(15px);
+            border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: flex; overflow: hidden; margin-bottom: 30px;
+        }
+
+        .stats-section {
+            flex: 1; padding: 40px; display: flex; flex-direction: column; justify-content: center; gap: 40px; border-right: 1px solid rgba(255,255,255,0.1);
+        }
+        .stat-label { font-size: 20px; color: #9D9E9E; margin-bottom: 10px; letter-spacing: 2px; text-transform: uppercase; display: flex; align-items: center; }
+        .stat-label::before { content: ''; display: inline-block; width: 8px; height: 20px; background-color: #28a745; margin-right: 10px; border-radius: 2px; }
+        .stat-number { font-size: 56px; font-weight: 900; color: #fff; font-family: 'Impact', sans-serif; text-shadow: 0 0 20px rgba(40, 167, 69, 0.3); line-height: 1; }
+        .stat-unit { font-size: 18px; color: #555; margin-left: 10px; font-weight: normal;}
+
+        /* --- 核心修改：右侧地图布局 --- */
+        .chart-section {
+            flex: 2;
+            display: flex;
+            flex-direction: column; /* 上下排列 */
+            padding: 30px; /* 给整个右侧区域加内边距，让内容不贴边 */
+        }
+
+        /* 标题现在是独立的块级元素，位于上方 */
+        .section-title {
+            position: static; /* 取消绝对定位 */
+            margin-bottom: 20px; /* 和下方地图的间距 */
+
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+
+            border-left: 6px solid #28a745;
+            padding-left: 15px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            /* 去掉了背景色，让它看起来更干净 */
+        }
+        .section-title span {
+            display: block; font-size: 14px; font-weight: normal; margin-top: 5px; color: #999; letter-spacing: 1px;
+        }
+
+        /* 地图容器 */
+        .map-container {
+            flex: 1; /* 占满剩余高度 */
+            width: 100%;
+            border-radius: 10px; /* 加回圆角 */
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.1); /* 加个微弱的边框 */
+            background: rgba(0,0,0,0.2); /* 地图加载前的底色 */
+        }
+        .map-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.9; object-position: center; }
+
+        /* --- 5. 功能模块矩阵 --- */
+        .features-grid {
+            display: flex; justify-content: center; gap: 20px;
+            width: 100%; max-width: 1050px; margin-bottom: 40px; flex-wrap: wrap;
+        }
+        .feature-box {
+            width: 160px; height: 160px;
+            background: rgba(31, 45, 53, 0.6); backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 15px;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            text-decoration: none; transition: all 0.3s; cursor: pointer;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+        .feature-box:hover {
+            background: rgba(40, 167, 69, 0.2); border-color: #28a745;
+            transform: translateY(-5px);
+        }
+        .feature-icon { font-size: 40px; margin-bottom: 15px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.5); }
+        .feature-title { color: #fff; font-size: 16px; font-weight: bold; letter-spacing: 1px; }
+
+        /* --- 6. 版权信息 (优化) --- */
+        .footer-copyright {
+            /* 移除 position: absolute; */
+            text-align: center;
+            color: rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+
+            /* 增加上下留白 */
+            padding: 30px 0;
+            width: 100%;
+
+            /* 确保它不会被压缩 */
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body>
+
+<video autoplay muted loop id="bg-video">
+    <source src="${pageContext.request.contextPath}/assets/bg_video.mp4" type="video/mp4">
+</video>
+
+<nav class="navbar">
+    <div class="nav-left">
+        <img src="${pageContext.request.contextPath}/assets/logo_bg.png" alt="Logo" class="logo-img">
+    </div>
+    <div class="nav-right">
+        <a href="main.jsp" class="nav-item active">首页</a>
+        <a href="${pageContext.request.contextPath}/listStudent" class="nav-item">人事管理</a>
+        <a href="${pageContext.request.contextPath}/missionDispatch" class="nav-item">任务派遣</a>
+        <a href="${pageContext.request.contextPath}/financeList" class="nav-item">财务报销</a>
+        <a href="${pageContext.request.contextPath}/materialList" class="nav-item">物资申领</a>
+        <a href="${pageContext.request.contextPath}/attendanceList" class="nav-item">考勤打卡</a>
+        <a href="#" class="nav-item">社区中心</a>
+        <a href="#" class="nav-item">帮助</a>
+
+        <div class="user-menu-container">
+            <div class="user-avatar" onclick="location.href='mine.jsp'">CMD</div>
+
+            <div class="user-dropdown">
+                <a href="mine.jsp" class="dropdown-item">👤 个人中心</a>
+                <a href="#" class="dropdown-item">⚙️ 系统设置</a>
+                <div style="height:1px; background:rgba(255,255,255,0.1); margin: 2px 0;"></div>
+                <a href="index.jsp" class="dropdown-item logout">🛑 退出登录</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<div class="main-content">
+
+    <div class="dashboard-panel">
+        <div class="stats-section">
+            <div class="stat-item">
+                <div class="stat-label">Total Operators / 干员统计</div>
+                <div class="stat-number"  style="color: #ffc107; text-shadow: 0 0 20px rgba(255, 193, 7, 0.3);">
+                    142 <span class="stat-unit">人</span>
+                </div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-label">Active Soldiers / 士兵统计</div>
+                <div class="stat-number">
+                    16,024 <span class="stat-unit">人</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chart-section">
+            <div class="section-title">
+                作战区域概览
+                <span>GLOBAL OPERATIONS THEATER</span>
+            </div>
+            <div class="map-container">
+                <img src="${pageContext.request.contextPath}/assets/map.jpg" alt="战略地图" class="map-img">
+            </div>
+        </div>
+    </div>
+
+    <div class="features-grid">
+        <a href="${pageContext.request.contextPath}/listStudent" class="feature-box">
+            <div class="feature-icon">📂</div>
+            <div class="feature-title">人事管理</div>
+        </a>
+
+        <a href="${pageContext.request.contextPath}/missionDispatch" class="feature-box">
+            <div class="feature-icon">🚁</div>
+            <div class="feature-title">任务派遣</div>
+        </a>
+
+        <a href="${pageContext.request.contextPath}/financeList" class="feature-box">
+            <div class="feature-icon">💰</div>
+            <div class="feature-title">财务报销</div>
+        </a>
+
+        <a href="${pageContext.request.contextPath}/materialList" class="feature-box">
+            <div class="feature-icon">📦</div>
+            <div class="feature-title">物资申领</div>
+        </a>
+
+        <a href="${pageContext.request.contextPath}/attendanceList" class="feature-box">
+            <div class="feature-icon">📅</div>
+            <div class="feature-title">考勤打卡</div>
+        </a>
+    </div>
+
+    <div class="footer-copyright">
+        COPYRIGHT © 2024-2025 LRB&HJM. ALL RIGHTS RESERVED
+    </div>
+</div>
+
+</body>
+</html>
